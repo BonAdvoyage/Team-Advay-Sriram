@@ -2,3 +2,25 @@
 -start with the Game class
   -Game()
   -toString()
+  -getPopulation methods
+  -set Methods
+  -set coordinates for everything
+  -code in the shapes
+  -write abstract player class
+  -write unoccupied class
+    -checkNeighbors
+    -bringtoLife
+  -write AI
+    -write AI()
+    -write placeShape()
+    -write transition()
+  -write Person
+    -write Person()
+    -write placeShape()
+    -write transition()
+  -write log
+  -write shapes instance var
+  -write play
+  -write Driver
+    -write main
+  
