@@ -1,0 +1,4 @@
+-get the Green Light
+-start with the Game class
+  -Game()
+  -toString()
