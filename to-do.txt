@@ -1,26 +1,27 @@
 -get the Green Light
 -start with the Game class
-  -Game()
-  -toString()
+  -Game() 1hr
+  -toString() 30mins
+  1hourn total
   -getPopulation methods
   -set Methods
   -set coordinates for everything
-  -code in the shapes
+  -code in the shapes 2hrs
   -write abstract player class
   -write unoccupied class
     -checkNeighbors
     -bringtoLife
-  -write AI
+  -write AI 2.5 hrs
     -write AI()
     -write placeShape()
     -write transition()
-  -write Person
+  -write Person 1hr
     -write Person()
     -write placeShape()
     -write transition()
-  -write log
+  -write log 1hr
   -write shapes instance var
-  -write play
-  -write Driver
+  -write play 1hr
+  -write Driver 45 mins
     -write main
   
