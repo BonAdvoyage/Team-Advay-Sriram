@@ -1,0 +1,43 @@
+Game
+-int turns, generations, AI_pop, Person_pop, Unoccupied_pop
+protected final int[][] shapes
++int[][] map
++Game()
++toString()
+-log()
++play()
++int getAI_Pop()
++int getPerson_Pop()
++int getUnoccupiedPop()
++void setAI_Pop()
++void setPerson_Pop()
+
+Unoccupied
+-int xcoor, ycoor
++Unoccupied()
++bringToLife(x,y,Player z)
++checkNeighbors()
+
+abstract Player
+-int xcoor, ycoor
++void transition()
++void placeShape()
+
+AI extends Player
+-int xcoor, ycoor
+-myTeam
+-enemies
++AI()
++void transition()
++void placeShape()
+
+Person extends Player
+-int xcoor, ycoor
+-myTeam
+-enemies
++Person()
++void transition()
++void placeShape()
+
+Driver
++void main(String[] args)

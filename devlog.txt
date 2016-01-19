@@ -1,0 +1,44 @@
+Janet and Advay's 
+Conway's Game of Risk!
+
+______________________________
+<mm-dd-yy>
+<description>
+______________________________
+01-15-16
+
+JANET: 
+Created 
+    +void setPatch()
+    +void clearPatch()
+    +int getXCoor()
+    +int getYCoor()
+    + Game()
+in Game.java
+
+ADVAY: 
+Created 
+    +int getAI_Pop()
+    +int getPerson_Pop()
+    +int getUnoccupied_Pop()
+    +int getGen()
+    +int getTurn()
+    +String getDifficulty()
+    +String toString()
+    +void setAI_Pop()
+    +void setPerson_Pop()
+Started
+    main method
+in Game.java
+-------------------------------
+01-17-16
+JANET:
+    Created Person.java
+    Created Player.java
+        Added: 
+        protected xcoor, ycoor vars
+        protected void transition()
+        protected void placeShape(int xcoor, int ycoor, int i)
+ADVAY:
+    Created AI.java
+    fixed toString in Game.java
