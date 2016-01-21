@@ -1,7 +1,8 @@
 Game
 -int turns, generations, AI_pop, Person_pop, Unoccupied_pop
 protected final int[][] shapes
-+int[][] map
+protected final int[] presetcoors
++int[][] grid
 +Game()
 +toString()
 -log()
@@ -29,7 +30,7 @@ AI extends Player
 -enemies
 +AI()
 +void transition()
-+void placeShape()
++void placeShape(xcoor,ycoor,String shape)
 
 Person extends Player
 -int xcoor, ycoor
@@ -37,7 +38,7 @@ Person extends Player
 -enemies
 +Person()
 +void transition()
-+void placeShape()
++void placeShape(xcoor,ycoor,String shape)
 
 Driver
 +void main(String[] args)

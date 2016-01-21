@@ -6,7 +6,6 @@ ______________________________
 <description>
 ______________________________
 01-15-16
-
 JANET: 
 Created 
     +void setPatch()
@@ -16,7 +15,7 @@ Created
     + Game()
 in Game.java
 
-ADVAY: 
+ADVAY:  
 Created 
     +int getAI_Pop()
     +int getPerson_Pop()
@@ -30,7 +29,7 @@ Created
 Started
     main method
 in Game.java
--------------------------------
+_______________________________
 01-17-16
 JANET:
     Created Person.java
@@ -42,3 +41,28 @@ JANET:
 ADVAY:
     Created AI.java
     fixed toString in Game.java
+_______________________________
+01-19-16
+JANET:
+
+ADVAY:
+    Created Unoccupied.java
+    Added:
+         protected list[], preset-coors[][] to Game
+_______________________________
+01-20-16
+JANET:
+    Debugged
+    Created:
+        Descriptive comments
+    Modified:
+        AI() to AI(xcoor,ycoor)
+        Person() to Person(xcoor,ycoor)
+        Unoccupied() to Unoccupied(xcoor,ycoor)
+        placeShape() to placeShape(xcoor,ycoor,int shape)
+    Wrote:
+        checkNeighbors(xcoor,ycoor,int shape) in Unoccupied
+ADVAY:
+    Debugged
+    Modified:
+        Game()
