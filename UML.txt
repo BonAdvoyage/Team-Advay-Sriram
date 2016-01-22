@@ -1,3 +1,10 @@
+Team Advay Sriram -- Janet Zhang, Advay Sriram
+APCS1 pd5
+HW58 -- Preparing to Launch
+2016-01-14
+Have Been Implemented: None
+Works in Progress: Getting the Green Light, Game, Patch, Unoccupied, Player, AI, Person
+Have not been Implemented:
 Game
 -int turns, generations, AI_pop, Person_pop, Unoccupied_pop
 protected final int[][] shapes
@@ -13,14 +20,13 @@ protected final int[] presetcoors
 +void setAI_Pop()
 +void setPerson_Pop()
 
-Patch 
+Patch extends Game
 protected int xcoor, ycoor
-+Unoccupied()
-+bringToLife(x,y,Player z)
 +checkNeighbors()
 
 Unoccupied extends Patch
-+Unoccupied()
++Unoccupied(int xcoor,int ycoor)
++bringToLife(x,y,Player z)
 +checkNeighbors()
 
 abstract Player extends Patch
@@ -28,18 +34,16 @@ abstract Player extends Patch
 +void placeShape()
 
 AI extends Player
--int xcoor, ycoor
 -myTeam
 -enemies
-+AI()
++AI(int xcoor,int ycoor)
 +void transition()
 +void placeShape(xcoor,ycoor,String shape)
 
 Person extends Player
--int xcoor, ycoor
 -myTeam
 -enemies
-+Person()
++Person(int xcoor,int ycoor)
 +void transition()
 +void placeShape(xcoor,ycoor,String shape)
 
