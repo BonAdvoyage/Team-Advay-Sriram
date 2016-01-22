@@ -13,14 +13,17 @@ protected final int[] presetcoors
 +void setAI_Pop()
 +void setPerson_Pop()
 
-Unoccupied
--int xcoor, ycoor
+Patch 
+protected int xcoor, ycoor
 +Unoccupied()
 +bringToLife(x,y,Player z)
 +checkNeighbors()
 
-abstract Player
--int xcoor, ycoor
+Unoccupied extends Patch
++Unoccupied()
++checkNeighbors()
+
+abstract Player extends Patch
 +void transition()
 +void placeShape()
 
