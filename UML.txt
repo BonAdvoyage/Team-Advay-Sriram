@@ -1,7 +1,7 @@
 Team Advay Sriram -- Janet Zhang, Advay Sriram
 APCS1 pd5
-HW58 -- Preparing to Launch
-2016-01-14
+HW58 -- Checking in
+2016-01-22
 Have Been Implemented: None
 Works in Progress: Getting the Green Light, Game, Patch, Unoccupied, Player, AI, Person
 Have not been Implemented:
