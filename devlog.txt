@@ -66,3 +66,7 @@ ADVAY:
     Debugged
     Modified:
         Game()
+_______________________________
+01-23-16
+JANET:
+    Debugged 60 errors in the code

@@ -1,4 +1,4 @@
-import java.utils.Keyboard;
+import cs1.Keyboard;
 
 public class Game{
     public Object grid [][] = new Object [20][20];
@@ -10,9 +10,11 @@ public class Game{
 
     public Game(){
         //forloops to set x and y coors to each patch
-        for(Object:d){
-            for(int patch:row){
-                setPatch(row,patch,Unoccupied);
+        for(int row=0;row<grid.length;row++){
+            for(int patch=0;patch<row;patch++){
+                Patch p=new Unoccupied(row,patch);
+                //Unoccupied u=new Unoccupied(row,patch);
+                setPatch(row,patch,(Unoccupied)p);
             }
         }
         turns=0; generations=0;
@@ -21,19 +23,14 @@ public class Game{
         Unoccupied_Pop=392;
         difficulty = "Easy";
    }
-    //methods
-   
-    public int getXCoor(){return xcoor;}
-   
-    public int getYCoor(){return ycoor;}
    
     public int getGen(){return generations;}
    
-    public int getTurn(){get turns;}
+    public int getTurn(){return turns;}
    
     public int getPersonPop(){return Person_Pop;}
    
-    public int getAIPop(){return AI_pop;}
+    public int getAIPop(){return AI_Pop;}
    
     public int getUnoccupiedPop(){return Unoccupied_Pop;}
    
@@ -43,31 +40,47 @@ public class Game{
         String ans = "";
         for (int y = 19; y > -1; y --){
             for (int x = 0; x < 20;x ++ ){
-                if (grid [x][y] = 1 ){ ans += "% ";}
-                if (grid [x][y] = 2){ans += "# ";}
-                if (grid [x][y] = 0){ans += "- ";}
+                if (grid [x][y] == 1){ ans += "% ";}
+                if (grid [x][y] == 2){ans += "# ";}
+                if (grid [x][y] == 0){ans += "- ";}
             }
             ans += "\n";
         }
         return ans;
     }
     
-    public void setPatch(int xcoor, int ycoor, Player p){
+    public void setPatch(int xcoor, int ycoor, Patch p){
         //creates a player on that patch
-        if (p instanceof Person){int[xcoor][ycoor]=Person(xcoor,ycoor);}
-        if (p instanceof AI){int[xcoor][ycoor]=AI(xcoor,ycoor);}
+        if (p instanceof Player){
+            p=(Player)p;
+            if (p instanceof Person){
+                p=(Person)p;
+                p=new Person(xcoor,ycoor);
+                grid[xcoor][ycoor]=p;}
+            if (p instanceof AI){
+                p=(AI)p;
+                p=new AI(xcoor,ycoor);
+                grid[xcoor][ycoor]=p;}
+        }   
+        else if (p instanceof Unoccupied){
+            p=(Unoccupied)p;
+            p=new Unoccupied(xcoor,ycoor);
+            grid[xcoor][ycoor]=p;}
     }
     public void clearPatch(int xcoor, int ycoor){
         //creates an unoccupied on that patch
-        grid[xcoor][ycoor]=Unoccupied(xcoor,ycoor);
+        Unoccupied o=new Unoccupied(xcoor,ycoor);
+        setPatch(xcoor,ycoor,o);
     }
     //win if one population is greater after 1 turn
     public boolean gameOver (){
-        for ()
+        if (AI_Pop>Person_Pop){System.out.println("AI wins!"); return true;}
+        if (AI_Pop<Person_Pop){System.out.println("Person wins!"); return true;}
+        return false;
     }
     public static void main (String [] args){
         Game g=new Game();
-        g.toString ();
+        g.toString();
     }
     
   /*   
