@@ -29,7 +29,7 @@ public class Patch extends Game {
             else if(grid[xcoor+1][ycoor-1] instanceof AI){    neighbors[1]=neighbors[1]++;}
             if(     grid[xcoor-1][ycoor+1] instanceof Person){neighbors[0]=neighbors[0]++;}
             else if(grid[xcoor-1][ycoor-1] instanceof AI){    neighbors[1]=neighbors[1]++;}
-        return neighbors;
+        return neighbors[] ;
     }
     
 }

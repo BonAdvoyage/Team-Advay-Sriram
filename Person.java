@@ -1,8 +1,10 @@
 public class Person extends Player {
     //creates a Person on the xcoor and ycoor of the grid
     //the Person will be identified by class and xcoor and ycoor
+    private int enemies;
+    private int allies;
     public Person(int xcoor,int ycoor){
-        Person a=new Patch(xcoor,ycoor);
+        super(xcoor,ycoor);
     }
     //follows the standard Conway's game of life rules
     //when transition is finished, the adjacent cells of opposite teams self destruct
@@ -18,8 +20,11 @@ public class Person extends Player {
         
     }
     public int[] checkNeighbors(int xcoor,int ycoor){super.checkNeighbors(xcoor,ycoor);}
-
+    //accessor to get neighbors
+    //records enemy and ally neighbors
     public int checkNumNeighbors(int xcoor, int ycoor){
-        return checkNeighbors(xcoor,ycoor)[0];       
+        allies=checkNeighbors(xcoor,ycoor)[0];
+        enemies=checkNeighbors(xcoor,ycoor)[1];
+        return allies+enemies;       
     }
 }

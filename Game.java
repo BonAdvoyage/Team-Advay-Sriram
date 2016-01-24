@@ -40,7 +40,7 @@ public class Game{
         String ans = "";
         for (int y = 19; y > -1; y --){
             for (int x = 0; x < 20;x ++ ){
-                if (grid [x][y] == 1){ ans += "% ";}
+                if (grid [x][y] == 1){ans += "% ";}
                 if (grid [x][y] == 2){ans += "# ";}
                 if (grid [x][y] == 0){ans += "- ";}
             }

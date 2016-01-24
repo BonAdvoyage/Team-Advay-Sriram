@@ -22,6 +22,9 @@ protected final int[] presetcoors
 
 Patch extends Game
 protected int xcoor, ycoor
++Patch(int xcoor,int ycoor)
++getXcoor
++getYcoor
 +checkNeighbors()
 
 Unoccupied extends Patch
@@ -32,6 +35,7 @@ Unoccupied extends Patch
 abstract Player extends Patch
 +void transition()
 +void placeShape()
++checkNeighbors(xcoor,ycoor)
 
 AI extends Player
 -myTeam
@@ -39,6 +43,7 @@ AI extends Player
 +AI(int xcoor,int ycoor)
 +void transition()
 +void placeShape(xcoor,ycoor,String shape)
++checkNumNeighbors(xcoor,ycoor)
 
 Person extends Player
 -myTeam
@@ -46,6 +51,8 @@ Person extends Player
 +Person(int xcoor,int ycoor)
 +void transition()
 +void placeShape(xcoor,ycoor,String shape)
++checkNeighbors(xcoor,ycoor)
++checkNumNeighbors(xcoor,ycoor)
 
 Driver
 +void main(String[] args)
