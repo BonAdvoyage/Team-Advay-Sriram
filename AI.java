@@ -13,14 +13,17 @@ public class AI extends Player {
     //everything is saved to a txt file after every generation
     //terminal prints after x generations
     public void transition(){
-        //if (checkNeighbors
+        if (checkNumNeighbors < 2 || checkNumNeighbors > 3){
+            
+        }
+        if ()
     }
     //places the shape at the xcoor and ycoor if unoccupied
     //of occupied, try again
     public void placeShape(int xcoor, int ycoor, int shape){
         
     }
-    public int[] checkNeighbors(int xcoor,int ycoor){ super.checkNeighbors(xcoor,ycoor);}
+    public int[] checkNeighbors(int xcoor,int ycoor){return super.checkNeighbors(xcoor,ycoor);}
     
     //accessor to get neighbors
     //records enemy neighbors and ally neighbors

@@ -19,7 +19,7 @@ public class Person extends Player {
     public void placeShape(int xcoor, int ycoor, int shape){
         
     }
-    public int[] checkNeighbors(int xcoor,int ycoor){super.checkNeighbors(xcoor,ycoor);}
+    public int[] checkNeighbors(int xcoor,int ycoor){return super.checkNeighbors(xcoor,ycoor);}
     //accessor to get neighbors
     //records enemy and ally neighbors
     public int checkNumNeighbors(int xcoor, int ycoor){

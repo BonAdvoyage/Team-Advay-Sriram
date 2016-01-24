@@ -12,24 +12,24 @@ public class Patch extends Game {
     public int getYCoor(){return ycoor;}
     
     public int[] checkNeighbors(int xcoor, int ycoor){
-        int[] neighbors=new int[2];
-            if(     grid[xcoor][ycoor+1] instanceof Person){neighbors[0]  =neighbors[0]++;}
-            else if(grid[xcoor][ycoor+1] instanceof AI){    neighbors[1]  =neighbors[1]++;}
-            if(     grid[xcoor][ycoor-1] instanceof Person){neighbors[0]  =neighbors[0]++;}
-            else if(grid[xcoor][ycoor-1] instanceof AI){    neighbors[1]  =neighbors[1]++;}
-            if(     grid[xcoor+1][ycoor] instanceof Person){neighbors[0]  =neighbors[0]++;}
-            else if(grid[xcoor+1][ycoor] instanceof AI){    neighbors[1]  =neighbors[1]++;}
-            if(     grid[xcoor-1][ycoor] instanceof Person){neighbors[0]  =neighbors[0]++;}
-            else if(grid[xcoor-1][ycoor] instanceof AI){    neighbors[1]  =neighbors[1]++;}
+        int [] neighbors =new int[2];
+            if(     grid[xcoor][ycoor+1]   instanceof Person){neighbors[0]=neighbors[0]++;}
+            else if(grid[xcoor][ycoor+1]   instanceof AI)    {neighbors[1]=neighbors[1]++;}
+            if(     grid[xcoor][ycoor-1]   instanceof Person){neighbors[0]=neighbors[0]++;}
+            else if(grid[xcoor][ycoor-1]   instanceof AI)    {neighbors[1]=neighbors[1]++;}
+            if(     grid[xcoor+1][ycoor]   instanceof Person){neighbors[0]=neighbors[0]++;}
+            else if(grid[xcoor+1][ycoor]   instanceof AI)    {neighbors[1]=neighbors[1]++;}
+            if(     grid[xcoor-1][ycoor]   instanceof Person){neighbors[0]=neighbors[0]++;}
+            else if(grid[xcoor-1][ycoor]   instanceof AI)    {neighbors[1]=neighbors[1]++;}
             if(     grid[xcoor-1][ycoor+1] instanceof Person){neighbors[0]=neighbors[0]++;}
-            else if(grid[xcoor-1][ycoor+1] instanceof AI){    neighbors[1]=neighbors[1]++;}
+            else if(grid[xcoor-1][ycoor+1] instanceof AI)    {neighbors[1]=neighbors[1]++;}
             if(     grid[xcoor+1][ycoor-1] instanceof Person){neighbors[0]=neighbors[0]++;}
-            else if(grid[xcoor+1][ycoor-1] instanceof AI){    neighbors[1]=neighbors[1]++;}
+            else if(grid[xcoor+1][ycoor-1] instanceof AI)    {neighbors[1]=neighbors[1]++;}
             if(     grid[xcoor+1][ycoor+1] instanceof Person){neighbors[0]=neighbors[0]++;}
-            else if(grid[xcoor+1][ycoor-1] instanceof AI){    neighbors[1]=neighbors[1]++;}
+            else if(grid[xcoor+1][ycoor-1] instanceof AI)    {neighbors[1]=neighbors[1]++;}
             if(     grid[xcoor-1][ycoor+1] instanceof Person){neighbors[0]=neighbors[0]++;}
-            else if(grid[xcoor-1][ycoor-1] instanceof AI){    neighbors[1]=neighbors[1]++;}
-        return neighbors[] ;
+            else if(grid[xcoor-1][ycoor-1] instanceof AI)    {neighbors[1]=neighbors[1]++;}
+        return neighbors;
     }
     
 }
