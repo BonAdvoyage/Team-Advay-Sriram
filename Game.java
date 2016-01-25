@@ -238,7 +238,7 @@ public class Game{
             while (! (gameOver())){
                 for (int x=0;x<20;x++){
                     transition();
-                    //g.write();
+                    newgame.write (toString());
                 }
                 System.out.println(this);
             }
@@ -277,8 +277,6 @@ public class Game{
             while (! (gameOver())){
                 for (int x=0;x<20;x++){
                     transition();
-                    newgame.write (toString());
-                    //write();
                 }
                 System.out.println(this);
             }
@@ -363,7 +361,6 @@ public class Game{
             while (! (gameOver())){
                 for (int x=0;x<20;x++){
                     transition();
-                    newgame.write (toString());
                 }
                 System.out.println(this);
             }
