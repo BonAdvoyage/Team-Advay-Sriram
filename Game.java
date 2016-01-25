@@ -6,6 +6,7 @@ public class Game{
     public int grid [][] = new int [20][20];
     protected int turns, generations, AI_Pop, Person_Pop, Unoccupied_Pop;
     protected String difficulty = "";
+    PrintWriter newgame = new PrintWriter ("Game.txt", "UTF-8");
     protected final String listOfShapes [] =  {
         "glider","acorn", "block","blinker","RPentomino",
         "lightSpaceship","mediumSpaceship", "mold","beehive","loaf",
@@ -34,9 +35,6 @@ public class Game{
         {4, 3, 1, 3, 4, 5, 6, 7, 10}
     };
     String [] usableShapes = new String [20];
-    
-    
- 
 
     public Game(){
         
@@ -86,8 +84,8 @@ public class Game{
         if (difficulty == "Easy"){
             String usableShapes [] = {"diehard", "prepond", "eater1", "glider", "toad", "block", "blinker", "beehive"};
         }
-        if (difficulty = "Hard"){
-            usableShapes == listOfShapes;
+        if (difficulty == "Hard"){
+            usableShapes = listOfShapes;
         }
     }
     public String toString (){
@@ -134,7 +132,7 @@ public class Game{
         return allies + enemies;
     }
     
-    public void transition ( ){
+    public void transition (){
         //if (ycoor > 20){ycoor = (ycoor % 20);}
         //if (xcoor > 20){xcoor = (xcoor % 20);}
         for (int xcoor = 0; xcoor < 20; xcoor ++){
@@ -207,9 +205,7 @@ public class Game{
         }
     }
     //prints grid  and stats on another file
-    public void write(){
-        //your implementation here
-    }
+
     
     public void play(){
         System.out.print("Please choose a difficulty level: \n\t1: Easy \n\t2: Hard: ");
@@ -217,6 +213,7 @@ public class Game{
 	    System.out.println("You've selected: "+getDifficulty());
     	System.out.println(Stats());
 	    System.out.println("Printing the grid..." + this);
+	    if (getDifficulty().equals("Easy")){
         System.out.print("Do you want to save this game in a file? y:Yes n:No: ");
         String Save=Keyboard.readString();
         if(Save.equals("y")){//write to another file
@@ -235,7 +232,8 @@ public class Game{
             String ycoor=Keyboard.readString();
             int Ycoor=Integer.parseInt(ycoor);
             placeShape(Shape,Xcoor,Ycoor,Side);
-            placeShape(Shape,Math.random()*20,Math.random()*20,2);
+            Shape=listOfShapes[(int)Math.random()*usableShapes.length];
+            placeShape(Shape,(int)Math.random()*20,(int)Math.random()*20,2);
             System.out.println(this);
             while (! (gameOver())){
                 for (int x=0;x<20;x++){
@@ -279,6 +277,7 @@ public class Game{
             while (! (gameOver())){
                 for (int x=0;x<20;x++){
                     transition();
+                    newgame.write (toString());
                     //write();
                 }
                 System.out.println(this);
@@ -299,6 +298,93 @@ public class Game{
                 while (newGame.equals("y")){play();break;}
             }
         }
+	    }
+	    else if (getDifficulty().equals("Hard")){
+        System.out.print("Do you want to save this game in a file? y:Yes n:No: ");
+        String Save=Keyboard.readString();
+        if(Save.equals("y")){//write to another file
+            //File f=new File();
+        	//start gameplay
+        	System.out.print("Select a shape:"+printShapeList()+"\nSelection: ");
+            String Shape=Keyboard.readString();
+        	System.out.print("Select a side:");
+            String side=Keyboard.readString();
+            int Side=Integer.parseInt(side);
+        	System.out.println("Select where you want to place the shape:");
+        	System.out.print("xcoor:");
+            String xcoor=Keyboard.readString();
+            int Xcoor=Integer.parseInt(xcoor);
+        	System.out.print("ycoor:");
+            String ycoor=Keyboard.readString();
+            int Ycoor=Integer.parseInt(ycoor);
+            placeShape(Shape,Xcoor,Ycoor,Side);
+            Shape=listOfShapes[(int)Math.random()*listOfShapes.length];
+            placeShape(Shape,(int)Math.random()*20,(int)Math.random()*20,2);
+            System.out.println(this);
+            while (! (gameOver())){
+                for (int x=0;x<20;x++){
+                    transition();
+                    newgame.write (toString());
+                }
+                System.out.println(this);
+            }
+            System.out.println(Stats());
+            if (AI_Pop>Person_Pop){System.out.println("YOU LOSE!");}
+            if (AI_Pop<Person_Pop){System.out.println("YOU WIN!");}
+            System.out.print("Show stats?:");
+            String Stats=Keyboard.readString();
+            if (Stats.equals("y")){
+                System.out.println(Stats());
+                System.out.println("Play again?");
+                String newGame=Keyboard.readString();
+                while (newGame.equals("y")){play();break;}
+            }
+            if (Stats.equals("n")){
+                System.out.println("Play again?");
+                String newGame=Keyboard.readString();
+                while (newGame.equals("y")){play();break;}
+            }
+        }
+        else if (Save.equals("n")){//continue without writing
+        	//start gameplay
+        	System.out.print("Select a shape:"+printShapeList()+"\nSelection: ");
+            String Shape=Keyboard.readString();
+        	System.out.print("Select a side:");
+            String side=Keyboard.readString();
+            int Side=Integer.parseInt(side);
+        	System.out.println("Select where you want to place the shape:");
+        	System.out.print("xcoor:");
+            String xcoor=Keyboard.readString();
+            int Xcoor=Integer.parseInt(xcoor);
+        	System.out.print("ycoor:");
+            String ycoor=Keyboard.readString();
+            int Ycoor=Integer.parseInt(ycoor);
+            placeShape(Shape,Xcoor,Ycoor,Side); System.out.println(this);
+            while (! (gameOver())){
+                for (int x=0;x<20;x++){
+                    transition();
+                    newgame.write (toString());
+                }
+                System.out.println(this);
+            }
+            if (AI_Pop>Person_Pop){System.out.println("YOU LOSE!");}
+            if (AI_Pop<Person_Pop){System.out.println("YOU WIN!");}
+            System.out.print("Show stats?:");
+            String Stats=Keyboard.readString();
+            if (Stats.equals("y")){
+                System.out.println(Stats());
+                System.out.println("Play again?");
+                String newGame=Keyboard.readString();
+                while (newGame.equals("y")){play();break;}
+            }
+            if (Stats.equals("n")){
+                System.out.println("Play again?");
+                String newGame=Keyboard.readString();
+                while (newGame.equals("y")){play();break;}
+            }
+        
+	    }
     }
     
+}
 }
