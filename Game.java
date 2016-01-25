@@ -83,11 +83,11 @@ public class Game{
         if (d==2) difficulty="Hard";
     }
     public void AI (){
-        if (difficulty = "Easy"){
+        if (difficulty == "Easy"){
             String usableShapes [] = {"diehard", "prepond", "eater1", "glider", "toad", "block", "blinker", "beehive"};
         }
         if (difficulty = "Hard"){
-            usableShapes [] = listOfShapes [];
+            usableShapes == listOfShapes;
         }
     }
     public String toString (){
@@ -234,7 +234,9 @@ public class Game{
         	System.out.print("ycoor:");
             String ycoor=Keyboard.readString();
             int Ycoor=Integer.parseInt(ycoor);
-            placeShape(Shape,Xcoor,Ycoor,Side); System.out.println(this);
+            placeShape(Shape,Xcoor,Ycoor,Side);
+            placeShape(Shape,Math.random()*20,Math.random()*20,2);
+            System.out.println(this);
             while (! (gameOver())){
                 for (int x=0;x<20;x++){
                     transition();
