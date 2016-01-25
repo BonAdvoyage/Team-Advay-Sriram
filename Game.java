@@ -33,6 +33,9 @@ public class Game{
         {8, 3, 7, 9, 10, 18, 22, 23, 24},
         {4, 3, 1, 3, 4, 5, 6, 7, 10}
     };
+    String [] usableShapes = new String [20];
+    
+    
  
 
     public Game(){
@@ -79,7 +82,14 @@ public class Game{
         if (d==1) difficulty="Easy";
         if (d==2) difficulty="Hard";
     }
-    
+    public void AI (){
+        if (difficulty = "Easy"){
+            String usableShapes [] = {"diehard", "prepond", "eater1", "glider", "toad", "block", "blinker", "beehive"};
+        }
+        if (difficulty = "Hard"){
+            usableShapes [] = listOfShapes [];
+        }
+    }
     public String toString (){
     	String ans = "";
     	for (int y = 19; y > -1; y --){
@@ -212,7 +222,7 @@ public class Game{
         if(Save.equals("y")){//write to another file
             //File f=new File();
         	//start gameplay
-        	System.out.println("Select a shape:"+printShapeList()+"\n Selection:");
+        	System.out.print("Select a shape:"+printShapeList()+"\nSelection: ");
             String Shape=Keyboard.readString();
         	System.out.print("Select a side:");
             String side=Keyboard.readString();
@@ -251,7 +261,7 @@ public class Game{
         }
         else if (Save.equals("n")){//continue without writing
         	//start gameplay
-        	System.out.println("Select a shape:"+printShapeList()+"\n Selection:");
+        	System.out.print("Select a shape:"+printShapeList()+"\nSelection: ");
             String Shape=Keyboard.readString();
         	System.out.print("Select a side:");
             String side=Keyboard.readString();
@@ -264,7 +274,6 @@ public class Game{
             String ycoor=Keyboard.readString();
             int Ycoor=Integer.parseInt(ycoor);
             placeShape(Shape,Xcoor,Ycoor,Side); System.out.println(this);
-            System.out.println(this);
             while (! (gameOver())){
                 for (int x=0;x<20;x++){
                     transition();
