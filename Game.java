@@ -3,10 +3,9 @@ import java.io.PrintWriter;
 import java.io.IOException;
 import cs1.Keyboard;
 public class Game{
-    public int grid [][] = new int [20][20];
+    public int grid [][] = new int [40][40];
     protected int turns, generations, AI_Pop, Person_Pop, Unoccupied_Pop;
     protected String difficulty = "";
-    PrintWriter newgame = new PrintWriter ("Game.txt", "UTF-8");
     protected final String listOfShapes [] =  {
         "glider","acorn", "block","blinker","RPentomino",
         "lightSpaceship","mediumSpaceship", "mold","beehive","loaf",
@@ -91,7 +90,7 @@ public class Game{
     public String toString (){
     	String ans = "";
     	for (int y = 19; y > -1; y --){
-    	    for (int x = 0; x < 20;x ++ ){
+    	    for (int x = 0; x < 40;x ++ ){
     		if (grid [x][y]==1){ans += "% ";}
     		if (grid [x][y]==2){ans += "# ";}
     		if (grid [x][y]==0){ans += "- ";}
@@ -103,8 +102,8 @@ public class Game{
     
     public int[] checkNeighbors(int xcoor, int ycoor){
         int [] neighbors =new int[2];
-        if (ycoor > 20){ycoor = (ycoor % 20);}
-        if (xcoor > 20){xcoor = (xcoor % 20);}
+        if (ycoor > 40){ycoor = (ycoor % 40);}
+        if (xcoor > 40){xcoor = (xcoor % 40);}
     	if(     grid[xcoor][ycoor+1]   ==1){neighbors[0]=neighbors[0]++;}
     	else if(grid[xcoor][ycoor+1]   ==2){neighbors[1]=neighbors[1]++;}
     	if(     grid[xcoor][ycoor-1]   ==1){neighbors[0]=neighbors[0]++;}
@@ -124,8 +123,8 @@ public class Game{
         return neighbors;
     }
     public int checkNumNeighbors (int xcoor, int ycoor){
-        if (ycoor > 20){ycoor = ycoor % 20;}
-        if (xcoor > 20){xcoor = xcoor % 20;}
+        if (ycoor > 40){ycoor = ycoor % 40;}
+        if (xcoor > 40){xcoor = xcoor % 40;}
         int [] ans = checkNeighbors (xcoor, ycoor);
         int allies = ans [0];
         int enemies = ans [1];
@@ -133,10 +132,10 @@ public class Game{
     }
     
     public void transition (){
-        //if (ycoor > 20){ycoor = (ycoor % 20);}
-        //if (xcoor > 20){xcoor = (xcoor % 20);}
-        for (int xcoor = 0; xcoor < 20; xcoor ++){
-            for (int ycoor = 0; ycoor < 20; ycoor ++){
+        //if (ycoor > 40){ycoor = (ycoor % 40);}
+        //if (xcoor > 40){xcoor = (xcoor % 40);}
+        for (int xcoor = 0; xcoor < 40; xcoor ++){
+            for (int ycoor = 0; ycoor < 40; ycoor ++){
                 if (checkNumNeighbors(xcoor,ycoor) > 3 || checkNumNeighbors(xcoor,ycoor) < 2) {
                     grid [xcoor][ycoor] = 0;
                 }
@@ -152,8 +151,8 @@ public class Game{
     
     public void clearPatch(int xcoor, int ycoor){
         //creates an unoccupied on that patch
-        if (ycoor > 20){ycoor = ycoor % 20;}
-        if (xcoor > 20){xcoor = xcoor % 20;}
+        if (ycoor > 40){ycoor = ycoor % 40;}
+        if (xcoor > 40){xcoor = xcoor % 40;}
     	if (grid[xcoor][ycoor]==1){Person_Pop--;}
     	if (grid[xcoor][ycoor]==2){AI_Pop--;}
         grid[xcoor][ycoor]=0;
@@ -179,8 +178,8 @@ public class Game{
     }
     public void placeShape (String shape, int xcoor, int ycoor, int side){
         int index = 0;
-        if (ycoor > 20){ycoor = ycoor % 20;}
-        if (xcoor > 20){xcoor = xcoor % 20;}
+        if (ycoor > 40){ycoor = ycoor % 40;}
+        if (xcoor > 40){xcoor = xcoor % 40;}
         for (int i = 0; i <listOfShapes.length; i ++){
             if (listOfShapes[i] == shape){i = index;}
         }
@@ -212,9 +211,9 @@ public class Game{
         String Diff=Keyboard.readString(); setDifficulty(Integer.parseInt(Diff)); 
 	    System.out.println("You've selected: "+getDifficulty());
     	System.out.println(Stats());
-	    System.out.println("Printing the grid..." + this);
+	    System.out.println("Printing the grid..." + "\n"+ this);
 	    if (getDifficulty().equals("Easy")){
-        System.out.print("Do you want to save this game in a file? y:Yes n:No: ");
+        System.out.println("Do you want to save this game in a file? y:Yes n:No: ");
         String Save=Keyboard.readString();
         if(Save.equals("y")){//write to another file
             //File f=new File();
@@ -233,12 +232,12 @@ public class Game{
             int Ycoor=Integer.parseInt(ycoor);
             placeShape(Shape,Xcoor,Ycoor,Side);
             Shape=listOfShapes[(int)Math.random()*usableShapes.length];
-            placeShape(Shape,(int)Math.random()*20,(int)Math.random()*20,2);
+            placeShape(Shape,(int)Math.random()*40,(int)Math.random()*40,2);
             System.out.println(this);
             while (! (gameOver())){
-                for (int x=0;x<20;x++){
+                for (int x=0;x<40;x++){
                     transition();
-                    newgame.write (toString());
+                    //newgame.write (toString());
                 }
                 System.out.println(this);
             }
@@ -275,7 +274,7 @@ public class Game{
             int Ycoor=Integer.parseInt(ycoor);
             placeShape(Shape,Xcoor,Ycoor,Side); System.out.println(this);
             while (! (gameOver())){
-                for (int x=0;x<20;x++){
+                for (int x=0;x<40;x++){
                     transition();
                 }
                 System.out.println(this);
@@ -317,12 +316,12 @@ public class Game{
             int Ycoor=Integer.parseInt(ycoor);
             placeShape(Shape,Xcoor,Ycoor,Side);
             Shape=listOfShapes[(int)Math.random()*listOfShapes.length];
-            placeShape(Shape,(int)Math.random()*20,(int)Math.random()*20,2);
+            placeShape(Shape,(int)Math.random()*40,(int)Math.random()*40,2);
             System.out.println(this);
             while (! (gameOver())){
-                for (int x=0;x<20;x++){
+                for (int x=0;x<40;x++){
                     transition();
-                    newgame.write (toString());
+                   // newgame.write (toString());
                 }
                 System.out.println(this);
             }
@@ -359,7 +358,7 @@ public class Game{
             int Ycoor=Integer.parseInt(ycoor);
             placeShape(Shape,Xcoor,Ycoor,Side); System.out.println(this);
             while (! (gameOver())){
-                for (int x=0;x<20;x++){
+                for (int x=0;x<40;x++){
                     transition();
                 }
                 System.out.println(this);
