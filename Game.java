@@ -48,10 +48,10 @@ public class Game{
     	grid[2][1]=1;
     	grid[2][2]=1;
     	//AI still life top right
-    	grid[17][17]=2;
-    	grid[17][18]=2;
-    	grid[18][17]=2;
-    	grid[18][18]=2;
+    	grid[37][37]=2;
+    	grid[37][38]=2;
+    	grid[38][37]=2;
+    	grid[38][38]=2;
     }
     
     public String printShapeList(){
