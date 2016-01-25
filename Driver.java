@@ -14,10 +14,9 @@ public class Driver{
     	System.out.println(g.Stats());
 	    System.out.println("Printing the grid...");
         System.out.println(g);
-        System.out.print("Do you want to save this game in a file? 1:Yes 2:No");
+        System.out.print("Do you want to save this game in a file? y:Yes n:No");
         String Save=Keyboard.readString();
-        int saved=Integer.parseInt(Save);
-        if(saved==1){//write to another file
+        if(Save.equals("y")){//write to another file
             //File f=new File();
         	//start gameplay
         	System.out.println("Select a shape:"+g.printShapeList());
@@ -34,7 +33,7 @@ public class Driver{
                 //g.write();
             }
         }
-        else if (saved==2){//continue without writing
+        else if (Save.equals("n")){//continue without writing
         	//start gameplay
         	System.out.println("Select a shape:"+g.printShapeList());
             String Shape=Keyboard.readString();
