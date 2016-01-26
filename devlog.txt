@@ -71,3 +71,17 @@ _______________________________
 JANET:
     Debugged 60 errors in the code
 _______________________________
+01-24-16
+JANET:
+    wrote the play() function
+ADVAY:
+    wrote placeshapes()
+    hardcoded all the coors of the shapes
+______________________________
+01-25-16
+JANET:
+    wrote saveFile()
+    found Savefile.java
+    debugged
+ADVAY:
+    debugged

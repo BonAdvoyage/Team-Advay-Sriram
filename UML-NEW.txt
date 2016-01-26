@@ -1,0 +1,48 @@
+Team Advay Sriram -- Janet Zhang, Advay Sriram
+APCS1 pd5
+HW58 -- Checking in
+2016-01-22
+Have Been Implemented: None
+Works in Progress: Getting the Green Light, Game, Patch, Unoccupied, Player, AI, Person
+Have not been Implemented:
+
++ public
+- private
+* protected
+
+
+Game
++int grid[][]
+*int turns, generations, AI_pop, Person_pop, Unoccupied_pop
+*String difficulty
+* final String[] shapes
+* final int[][] presetcoors
+* String[] usableShapes
+
++Game()
++String printShapeList()
++int getGen()
++int getTurn()
++int getAI_Pop()
++int getPerson_Pop()
++int getUnoccupiedPop()
++String getDifficulty()
++void setDifficulty(int d)
++void AI()
++String toString()
++int[] checkNeighbors(int xcoor, int ycoor)
++int checkNumNeighbots(int xcoor, int ycoor)
++void transition()
++void clearPatch(int xcoor,int ycoor)
++boolean gameOver()
++String Stats()
++void placeShape(String shape, int xcoor, int ycoor, int side)
++void saveFile()
++play()
+
+SaveFile
++static String readInfo()
++static void writeInfo(String line)
+
+Driver
++void main(String[] args)
