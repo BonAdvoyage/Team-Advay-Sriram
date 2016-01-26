@@ -198,7 +198,7 @@ public class Game{
     
     //win if one population is greater after 1 turn
     public boolean gameOver (){
-        if  (AI_Pop > Person_Pop || AI_Pop < Person_Pop) {return true;}
+        if  ((AI_Pop > Person_Pop || AI_Pop < Person_Pop) && turns>1) {return true;}
         return false;
     }
     
