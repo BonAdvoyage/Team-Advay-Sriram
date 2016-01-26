@@ -87,3 +87,8 @@ JANET:
     debugged
 ADVAY:
     debugged
+______________________________
+01-26-16
+JANET:
+    Fixed major bugs in Transition, check neighnors, checknumneighbors, play()
+    figured out the wrapper function.

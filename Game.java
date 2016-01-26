@@ -44,7 +44,6 @@ public class Game{
         Unoccupied_Pop=(grid.length*grid.length)-AI_Pop-Person_Pop;
         difficulty = "Easy";
         
-        /*
     	//1 still life bottom left
     	grid[1][1]=1;
     	grid[1][2]=1;
@@ -55,17 +54,7 @@ public class Game{
     	grid[27][28]=2;
     	grid[28][27]=2;
     	grid[28][28]=2;
-    	*/
-    	/*
-    	grid[1][0]=1;
-    	grid[0][1]=1;
-    	grid[1][1]=1;
-    	grid[29][0]=2;
-    	grid[29][1]=2;
-    	grid[0][29]=2;
-    	grid[1][29]=2;
-    	grid[29][29]=2;
-    	*/
+    	
     	
     	
     }
@@ -179,7 +168,7 @@ public class Game{
                     if (grid[xcoor][ycoor]==1) {grid [xcoor][ycoor] = 0; Unoccupied_Pop++; generations++;Person_Pop--;}
                     if (grid[xcoor][ycoor]==2) {grid [xcoor][ycoor] = 0; Unoccupied_Pop++; generations++;AI_Pop--;}
                 }
-                if (checkNumNeighbors (xcoor, ycoor) == 3 || checkNumNeighbors (xcoor, ycoor) == 2){
+                else if (checkNumNeighbors (xcoor, ycoor) == 3 || checkNumNeighbors (xcoor, ycoor) == 2){
                     if ( ! (grid[xcoor][ycoor]==0 ) ){
                         if (checkNeighbors(xcoor, ycoor) [1] > checkNeighbors(xcoor, ycoor) [0]){
                             grid [xcoor] [ycoor] = 2; AI_Pop++; generations++; Unoccupied_Pop++;
@@ -230,21 +219,9 @@ public class Game{
         int index = shape;
         if (ycoor >= 30){ycoor = 30- (ycoor % 30);}
         if (xcoor >= 30){xcoor = 30- (xcoor % 30);}
-        //for (int i = 0; i <listOfShapes.length; i ++){
-        //    if (listOfShapes[i] == shape){index = i;}
-        //}
         int xbox = presetCoors [index][0];
         int ybox = presetCoors [index][1];
-        while ( !(enoughSpace(index,xcoor,ycoor)) ){break;}
-        /*for (int t = 0; t < ybox ;t++){
-            for (int z = 2; z < presetCoors[index].length;z++ ){
-                for (int p = xbox; p > 0; p --){
-                    if (t == presetCoors [index][z]%presetCoors[index].length){
-                        grid [xcoor +((z -2)%presetCoors[index].length)][p] = side;
-                    }
-                }
-            }
-        }*/
+        while ( !(enoughSpace(index,xcoor,ycoor)) ){return;}
         for (int t = 2; t < presetCoors[index].length; t ++){
             for (int p = xcoor; p < xcoor+xbox; p++){
                 for (int q = ycoor; q < ycoor +ybox; q ++){
@@ -252,11 +229,10 @@ public class Game{
                     if (q >= 30){q = 30-(q%30);}
                     if (presetCoors [index][t] == (xbox*(q-ycoor-1) + p-xcoor)){
                         grid [p][q] = side;
-                        }
                     }
                 }
             }
-        
+        }
     }//end placeshape
     
     //prints grid and stats on another file
@@ -294,13 +270,13 @@ public class Game{
                 placeShape(Shape,(int)(Math.random()*grid.length),(int)(Math.random()*grid.length),2);
                 System.out.println(this);
                 while (! (gameOver())){
-                    while (generations<30){
+                    while (generations<5){
                         saveFile();
                         transition();
+                        System.out.println(this);
                     }//end while
                 }//end while
                 System.out.println(this);
-                System.out.println(Stats());
                 if (AI_Pop>Person_Pop){System.out.println("YOU LOSE!");}
                 if (AI_Pop<Person_Pop){System.out.println("YOU WIN!");}
                 System.out.print("Show stats?:");
@@ -316,7 +292,7 @@ public class Game{
                     String newGame=Keyboard.readString();
                     while (newGame.equals("y")){play();break;}
                 }//end nostats
-            }//end no save
+            }//end yes save
             else if (Save.equals("n")){//continue without writing
             	//start gameplay
             	System.out.print("Select a shape:"+printShapeList()+"\nSelection: ");
@@ -334,10 +310,9 @@ public class Game{
                 placeShape(Shape,(int)(Math.random()*grid.length),(int)(Math.random()*grid.length),2);
                 System.out.println(this);
                 while (! (gameOver())){
-                    while (generations<30){
+                    while (generations<5){
                         transition();
                     }//end while
-                    System.out.println(this);
                 }//end while
                 if (AI_Pop>Person_Pop){System.out.println("YOU LOSE!");}
                 if (AI_Pop<Person_Pop){System.out.println("YOU WIN!");}
@@ -378,13 +353,11 @@ public class Game{
                 placeShape(Shape,(int)(Math.random()*grid.length),(int)(Math.random()*grid.length),2);
                 System.out.println(this);
                 while (! (gameOver())){
-                    while (generations<30){
+                    while (generations<5){
                         saveFile();
                         transition();
                     }//end while
-                    System.out.println(this);
                 }//end while
-                System.out.println(Stats());
                 if (AI_Pop>Person_Pop){System.out.println("YOU LOSE!");}
                 if (AI_Pop<Person_Pop){System.out.println("YOU WIN!");}
                 System.out.print("Show stats?:");
@@ -418,7 +391,7 @@ public class Game{
                 placeShape(Shape,(int)(Math.random()*grid.length),(int)(Math.random()*grid.length),2);
                 System.out.println(this);
                 while (! (gameOver())){
-                    while (generations<30){
+                    while (generations<5){
                         transition();
                     }//end while
                     System.out.println(this);
