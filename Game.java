@@ -198,7 +198,7 @@ public class Game{
     
     //win if one population is greater after 1 turn
     public boolean gameOver (){
-        if  ((AI_Pop > Person_Pop || AI_Pop < Person_Pop) && turns>1) {return true;}
+        if  ((AI_Pop > Person_Pop || AI_Pop < Person_Pop)) {return true;}
         return false;
     }
     
@@ -258,10 +258,10 @@ public class Game{
     //prints grid and stats on another file
     public void saveFile(){
         String stats=Stats();
-        String map=toString();
+        //String map=toString();
         String oldFile="";
         oldFile+=Savefile.readInfo();
-        Savefile.writeInfo(oldFile+"\n"+map + stats);
+        Savefile.writeInfo(oldFile+"\n"+ stats + "\n");
     }
     
     public void play(){
@@ -287,6 +287,15 @@ public class Game{
             	System.out.print("ycoor:");
                 String ycoor=Keyboard.readString();
                 int Ycoor=Integer.parseInt(ycoor);
+                while(! (enoughSpace(Shape,Xcoor,Ycoor)) ){
+                	System.out.println("Select where you want to place the shape:");
+                	System.out.print("xcoor:");
+                    String newxcoor=Keyboard.readString();
+                    int NewXcoor=Integer.parseInt(newxcoor);
+                	System.out.print("ycoor:");
+                    String newycoor=Keyboard.readString();
+                    int NewYcoor=Integer.parseInt(newycoor);
+                }
                 placeShape(Shape,Xcoor,Ycoor,1); turns++;
                 Shape=(int)Math.random()*usableShapes.length;
                 placeShape(Shape,(int)(Math.random()*grid.length),(int)(Math.random()*grid.length),2);
@@ -302,6 +311,7 @@ public class Game{
                         System.out.println(this);
                     }//end while
                 }//end while
+                
                 System.out.println(this);
                 if (AI_Pop>Person_Pop){System.out.println("YOU LOSE!");}
                 if (AI_Pop<Person_Pop){System.out.println("YOU WIN!");}
@@ -331,6 +341,15 @@ public class Game{
             	System.out.print("ycoor:");
                 String ycoor=Keyboard.readString();
                 int Ycoor=Integer.parseInt(ycoor);
+                while(! (enoughSpace(Shape,Xcoor,Ycoor)) ){
+                	System.out.println("Select where you want to place the shape:");
+                	System.out.print("xcoor:");
+                    String newxcoor=Keyboard.readString();
+                    int NewXcoor=Integer.parseInt(newxcoor);
+                	System.out.print("ycoor:");
+                    String newycoor=Keyboard.readString();
+                    int NewYcoor=Integer.parseInt(newycoor);
+                }
                 placeShape(Shape,Xcoor,Ycoor,1); turns++;
                 Shape=(int)Math.random()*usableShapes.length;
                 placeShape(Shape,(int)(Math.random()*grid.length),(int)(Math.random()*grid.length),2);
@@ -374,6 +393,15 @@ public class Game{
             	System.out.print("ycoor:");
                 String ycoor=Keyboard.readString();
                 int Ycoor=Integer.parseInt(ycoor);
+                while(! (enoughSpace(Shape,Xcoor,Ycoor)) ){
+                	System.out.println("Select where you want to place the shape:");
+                	System.out.print("xcoor:");
+                    String newxcoor=Keyboard.readString();
+                    int NewXcoor=Integer.parseInt(newxcoor);
+                	System.out.print("ycoor:");
+                    String newycoor=Keyboard.readString();
+                    int NewYcoor=Integer.parseInt(newycoor);
+                }
                 placeShape(Shape,Xcoor,Ycoor,1); turns++;
                 Shape=(int)Math.random()*usableShapes.length;
                 placeShape(Shape,(int)(Math.random()*grid.length),(int)(Math.random()*grid.length),2);
@@ -412,6 +440,15 @@ public class Game{
             	System.out.print("ycoor:");
                 String ycoor=Keyboard.readString();
                 int Ycoor=Integer.parseInt(ycoor);
+                while(! (enoughSpace(Shape,Xcoor,Ycoor)) ){
+                	System.out.println("Select where you want to place the shape:");
+                	System.out.print("xcoor:");
+                    String newxcoor=Keyboard.readString();
+                    int NewXcoor=Integer.parseInt(newxcoor);
+                	System.out.print("ycoor:");
+                    String newycoor=Keyboard.readString();
+                    int NewYcoor=Integer.parseInt(newycoor);
+                }
                 placeShape(Shape,Xcoor,Ycoor,1); turns++;
                 Shape=(int)Math.random()*usableShapes.length;
                 placeShape(Shape,(int)(Math.random()*grid.length),(int)(Math.random()*grid.length),2);
