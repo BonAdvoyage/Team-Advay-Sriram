@@ -35,13 +35,13 @@ public class Game{
         {4, 3, 1, 3, 4, 5, 6, 7, 10}
     };
     protected String [] usableShapes = new String [20];
+    protected boolean save;
 
     public Game(){
-        
         turns=0; generations=0;
         AI_Pop=4;
         Person_Pop=4;
-        Unoccupied_Pop=1592;
+        Unoccupied_Pop=(grid.length*grid.length)-AI_Pop-Person_Pop;
         difficulty = "Easy";
     	//1 still life bottom left
     	grid[1][1]=1;
@@ -63,6 +63,7 @@ public class Game{
         return s;
     }
     
+    public boolean getSave(){return save;}
     
     public int getGen(){return generations;}
    
@@ -73,6 +74,15 @@ public class Game{
     public int getAIPop(){return AI_Pop;}
    
     public int getUnoccupiedPop(){return Unoccupied_Pop;}
+    
+    public int getSide(int xcoor,int ycoor){
+        if (ycoor >= 29){ycoor = 1+(ycoor % 30);}
+        if (ycoor <= 1){ycoor = 29-(ycoor % 30);}
+        if (xcoor >= 29){xcoor = 1+(xcoor % 30);}
+        if (xcoor <= 1){xcoor = 29-(xcoor % 30);}
+        //return grid[xcoor][ycoor];
+        return 1;
+    }
    
     public String getDifficulty(){return difficulty;}
     
@@ -103,29 +113,41 @@ public class Game{
     
     public int[] checkNeighbors(int xcoor, int ycoor){
         int [] neighbors =new int[2];
-        if (ycoor >= 30){ycoor = 30-(ycoor % 30);}
-        if (xcoor >= 30){xcoor = 30-(xcoor % 30);}
-    	if(     grid[xcoor][ycoor+1]   ==1){neighbors[0]++;}
-    	else if(grid[xcoor][ycoor+1]   ==2){neighbors[1]++;}
-    	if(     grid[xcoor][ycoor-1]   ==1){neighbors[0]++;}
-    	else if(grid[xcoor][ycoor-1]   ==2){neighbors[1]++;}
-    	if(     grid[xcoor+1][ycoor]   ==1){neighbors[0]++;}
-    	else if(grid[xcoor+1][ycoor]   ==2){neighbors[1]++;}
-    	if(     grid[xcoor-1][ycoor]   ==1){neighbors[0]++;}
-    	else if(grid[xcoor-1][ycoor]   ==2){neighbors[1]++;}
-    	if(     grid[xcoor-1][ycoor+1] ==1){neighbors[0]++;}
-    	else if(grid[xcoor-1][ycoor+1] ==2){neighbors[1]++;}
-    	if(     grid[xcoor+1][ycoor-1] ==1){neighbors[0]++;}
-    	else if(grid[xcoor+1][ycoor-1] ==2){neighbors[1]++;}
-    	if(     grid[xcoor+1][ycoor+1] ==1){neighbors[0]++;}
-    	else if(grid[xcoor+1][ycoor-1] ==2){neighbors[1]++;}
-    	if(     grid[xcoor-1][ycoor+1] ==1){neighbors[0]++;}
-    	else if(grid[xcoor-1][ycoor-1] ==2){neighbors[1]++;}
+        int yp = ycoor + 1;
+        int ym = ycoor - 1;
+        int xp = xcoor + 1;
+        int xm = xcoor - 1;
+        if (ycoor >= 29){ycoor = 1+(ycoor % 30);}
+        if (ycoor <= 1){ycoor = 29-(ycoor % 30);}
+        if (xcoor >= 29){xcoor = 1+(xcoor % 30);}
+        if (xcoor <= 1){xcoor = 29-(xcoor % 30);}
+        if (yp >= 29){yp = 0+((yp) % 30);}
+        if (ym <= 1){ym = 29-((ym) % 30);}
+        if (xp >= 29){xp = 1+((xp) % 30);}
+        if (xm <= 1){xm = 29-((xm) % 30);}
+    	if(     getSide(xcoor,yp)   ==1){neighbors[0]++;}
+    	else if(getSide(xcoor,yp)   ==2){neighbors[1]++;}
+    	if(     getSide(xcoor,ym)   ==1){neighbors[0]++;}
+    	else if(getSide(xcoor,ym)   ==2){neighbors[1]++;}
+    	if(     getSide(xp,ycoor)   ==1){neighbors[0]++;}
+    	else if(getSide(xp,ycoor)   ==2){neighbors[1]++;}
+    	if(     getSide(xm,ycoor)   ==1){neighbors[0]++;}
+    	else if(getSide(xm,ycoor)   ==2){neighbors[1]++;}
+    	if(     getSide(xm,yp) ==1){neighbors[0]++;}
+    	else if(getSide(xm,yp) ==2){neighbors[1]++;}
+    	if(     getSide(xp,ym) ==1){neighbors[0]++;}
+    	else if(getSide(xp,ym) ==2){neighbors[1]++;}
+    	if(     getSide(xp,yp) ==1){neighbors[0]++;}
+    	else if(getSide(xp,ym) ==2){neighbors[1]++;}
+    	if(     getSide(xm,yp) ==1){neighbors[0]++;}
+    	else if(getSide(xm,ym) ==2){neighbors[1]++;}
         return neighbors;
     }
     public int checkNumNeighbors (int xcoor, int ycoor){
-        if (ycoor > 30){ycoor = 30-(ycoor % 30);}
-        if (xcoor > 30){xcoor = 30-(xcoor % 30);}
+        if (ycoor >= 30){ycoor = 0-(ycoor % 30);}
+        if (ycoor <= 0){ycoor = 30-(ycoor % 30);}
+        if (xcoor >= 30){xcoor = 0-(xcoor % 30);}
+        if (xcoor <= 0){xcoor = 30-(xcoor % 30);}
         int [] ans = checkNeighbors (xcoor, ycoor);
         int allies = ans [0];
         int enemies = ans [1];
@@ -152,8 +174,8 @@ public class Game{
     
     public void clearPatch(int xcoor, int ycoor){
         //creates an unoccupied on that patch
-        if (ycoor > 30){ycoor = 30-(ycoor % 30);}
-        if (xcoor > 30){xcoor = 30-(xcoor % 30);}
+        if (ycoor >= 30){ycoor = 30-(ycoor % 30);}
+        if (xcoor >= 30){xcoor = 30-(xcoor % 30);}
     	if (grid[xcoor][ycoor]==1){Person_Pop--;}
     	if (grid[xcoor][ycoor]==2){AI_Pop--;}
         grid[xcoor][ycoor]=0;
@@ -177,23 +199,31 @@ public class Game{
     	s+="\nDifficulty level:"+getDifficulty();
     	return s;
     }
+    
+    public boolean enoughSpace(int shape, int xcoor, int ycoor){
+        int[] coors=presetCoors[shape];
+        int xbox=coors[0]; int ybox=coors[1];
+        for (int a = xcoor; a < xbox; a ++){
+            for (int b = ycoor; b < ybox; b ++){
+                if (grid [a][b] != 0){
+                    System.out.println ("Not enough space. Choose another coor");
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
     public void placeShape (String shape, int xcoor, int ycoor, int side){
         int index = 0;
-        if (ycoor > 30){ycoor = 30- (ycoor % 30);}
-        if (xcoor > 30){xcoor = 30- (xcoor % 30);}
+        if (ycoor >= 30){ycoor = 30- (ycoor % 30);}
+        if (xcoor >= 30){xcoor = 30- (xcoor % 30);}
         for (int i = 0; i <listOfShapes.length; i ++){
             if (listOfShapes[i] == shape){index = i;}
         }
         int xbox = presetCoors [index][0];
         int ybox = presetCoors [index][1];
-        for (int a = xcoor; a < xbox; a ++){
-            for (int b = ycoor; b < ybox; b ++){
-                while (grid [a][b] != 0){
-                    System.out.println ("Not enough space.");
-                    break;
-                }
-            }
-        }
+        while ( !(enoughSpace(index,xcoor,ycoor)) ){break;}
         /*for (int t = 0; t < ybox ;t++){
             for (int z = 2; z < presetCoors[index].length;z++ ){
                 for (int p = xbox; p > 0; p --){
@@ -206,14 +236,15 @@ public class Game{
         for (int t = 2; t < presetCoors[index].length; t ++){
             for (int p = xcoor; p < xcoor+xbox; p++){
                 for (int q = ycoor; q < ycoor +ybox; q ++){
-                    if (p > 30){p = 30-(p%30);}
-                    if (q > 30){q = 30-(q%30);}
+                    if (p >= 30){p = 30-(p%30);}
+                    if (q >= 30){q = 30-(q%30);}
                     if (presetCoors [index][t] == (xbox*(q-ycoor-1) + p-xcoor)){
                         grid [p][q] = side;
+                        }
                     }
                 }
             }
-        }
+        
     }//end placeshape
     
     //prints grid and stats on another file
@@ -235,6 +266,7 @@ public class Game{
             if(Save.equals("y")){//write to another file
                 //File f=new File();
             	//start gameplay
+            	save=true;
             	System.out.print("Select a shape:"+printShapeList()+"\nSelection: ");
                 String Shape=Keyboard.readString();
             	System.out.println("Select where you want to place the shape:");
@@ -316,6 +348,7 @@ public class Game{
             if(Save.equals("y")){//write to another file
                 //File f=new File();
             	//start gameplay
+            	save=true;
             	System.out.print("Select a shape:"+printShapeList()+"\nSelection: ");
                 String Shape=Keyboard.readString();
             	System.out.println("Select where you want to place the shape:");

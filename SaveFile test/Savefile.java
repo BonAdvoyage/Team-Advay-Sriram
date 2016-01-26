@@ -10,7 +10,7 @@ public class Savefile{
     // returns String of all content in savefile.txt
     public static String readInfo(){
     	try{
-    	    File savefile = new File("Game.txt");
+    	    File savefile = new File("savefile.txt");
     	    FileReader fileReader = new FileReader(savefile);
     	    BufferedReader bufferedReader = new BufferedReader(fileReader);
     	    StringBuffer contents = new StringBuffer();
@@ -32,7 +32,7 @@ public class Savefile{
     //     info for each player is separated by a delimiter, |
     public static void writeInfo(String line){
     	try{
-    	    File savefile = new File("Game.txt"); // new file object
+    	    File savefile = new File("savefile.txt"); // new file object
     	    FileWriter writer = new FileWriter(savefile); // new writer object that will write to savefile
     	    writer.write(readInfo()+line); // write to content
     	    writer.flush(); // confirm changes
@@ -44,7 +44,11 @@ public class Savefile{
     }
 
     public static void main(String[] args){
-    	File savefile = new File("Game.txt"); // new file object
+    	File savefile = new File("savefile.txt"); // new file object
+    	System.out.println( Savefile.readInfo() );
+    	Savefile.writeInfo("Hola");
+    	System.out.println( Savefile.readInfo() );
+    	Savefile.writeInfo("ni hao");
     	System.out.println( Savefile.readInfo() );
     }
 }

@@ -77,6 +77,8 @@ JANET:
 ADVAY:
     wrote placeshapes()
     hardcoded all the coors of the shapes
+    wrote listOfShapes
+    coded transition
 ______________________________
 01-25-16
 JANET:
