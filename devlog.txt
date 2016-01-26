@@ -44,7 +44,7 @@ ADVAY:
 _______________________________
 01-19-16
 JANET:
-
+    Debugged
 ADVAY:
     Created Unoccupied.java
     Added:
