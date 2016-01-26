@@ -92,3 +92,4 @@ ______________________________
 JANET:
     Fixed major bugs in Transition, check neighnors, checknumneighbors, play()
     figured out the wrapper function.
+    robustified play()
