@@ -33,8 +33,17 @@ public class Savefile{
     public static void writeInfo(String line){
     	try{
     	    File savefile = new File("savefile.txt"); // new file object
+    	    FileReader fileReader = new FileReader(savefile);
+    	    BufferedReader bufferedReader = new BufferedReader(fileReader);
+    	    StringBuffer contents = new StringBuffer();
+    	    String readline;
+    	    while ((readline = bufferedReader.readLine()) != null){
+        		contents.append(readline);
+    	    }
+    	    fileReader.close();
+    	    //return contents.toString();
     	    FileWriter writer = new FileWriter(savefile); // new writer object that will write to savefile
-    	    writer.write(readInfo()+line); // write to content
+    	    writer.write(contents.toString()+line); // write to content
     	    writer.flush(); // confirm changes
     	    writer.close(); // stop further editing
     	}
@@ -45,10 +54,11 @@ public class Savefile{
 
     public static void main(String[] args){
     	File savefile = new File("savefile.txt"); // new file object
-    	System.out.println( Savefile.readInfo() );
-    	Savefile.writeInfo("Hola");
-    	System.out.println( Savefile.readInfo() );
-    	Savefile.writeInfo("ni hao");
+    	String x="";
+    	x+= Savefile.readInfo();
+    	x+="hi ";
+    	writeInfo(x);
+    	//writeInfo("hello");
     	System.out.println( Savefile.readInfo() );
     }
 }

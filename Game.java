@@ -77,11 +77,25 @@ public class Game{
    
     public int getTurn(){return turns;}
    
-    public int getPersonPop(){return Person_Pop;}
+    public int getPersonPop(){
+        for(int xcoor=0;xcoor<grid.length;xcoor++){
+            for(int ycoor=0;ycoor<grid.length;ycoor++){
+                if (grid[xcoor][ycoor]==1){Person_Pop++;}
+            }
+        }
+        return Person_Pop;
+    }
    
-    public int getAIPop(){return AI_Pop;}
+    public int getAIPop(){
+        for(int xcoor=0;xcoor<grid.length;xcoor++){
+            for(int ycoor=0;ycoor<grid.length;ycoor++){
+                if (grid[xcoor][ycoor]==1){AI_Pop++;}
+            }
+        }
+        return AI_Pop;
+    }
    
-    public int getUnoccupiedPop(){return Unoccupied_Pop;}
+    public int getUnoccupiedPop(){return ((grid.length*grid.length)-AI_Pop-Person_Pop);}
     
     public int getSide(int xcoor,int ycoor){
         if (ycoor >= 29){ycoor = 0+(ycoor % 29);}
@@ -217,18 +231,24 @@ public class Game{
     
     public void placeShape (int shape, int xcoor, int ycoor, int side){
         int index = shape;
-        if (ycoor >= 30){ycoor = 30- (ycoor % 30);}
-        if (xcoor >= 30){xcoor = 30- (xcoor % 30);}
+        if (ycoor > 29){ycoor = -1+(ycoor % 29);}
+        if (ycoor < 0){ycoor = grid.length+(ycoor % 29);}
+        if (xcoor > 29){xcoor = -1+(xcoor % 29);}
+        if (xcoor < 0){xcoor = grid.length+(xcoor % 29);}
         int xbox = presetCoors [index][0];
         int ybox = presetCoors [index][1];
         while ( !(enoughSpace(index,xcoor,ycoor)) ){return;}
         for (int t = 2; t < presetCoors[index].length; t ++){
             for (int p = xcoor; p < xcoor+xbox; p++){
                 for (int q = ycoor; q < ycoor +ybox; q ++){
-                    if (p >= 30){p = 30-(p%30);}
-                    if (q >= 30){q = 30-(q%30);}
-                    if (presetCoors [index][t] == (xbox*(q-ycoor-1) + p-xcoor)){
+                    if (q > 29){q = -1+(q % 29);}
+                    if (q < 0){q = grid.length+(q % 29);}
+                    if (p > 29){p = -1+(p % 29);}
+                    if (p < 0){p = grid.length+(p % 29);}
+                    if (presetCoors [index][t] == (xbox*(q-ycoor-1) + ycoor*(p-xcoor))){
                         grid [p][q] = side;
+                        if(side==1){Person_Pop+=(presetCoors.length-2);Unoccupied_Pop-=(presetCoors.length-2);}
+                        if(side==2){AI_Pop+=(presetCoors.length-2);Unoccupied_Pop-=(presetCoors.length-2);}
                     }
                 }
             }
@@ -239,7 +259,9 @@ public class Game{
     public void saveFile(){
         String stats=Stats();
         String map=toString();
-        Savefile.writeInfo(map + stats);
+        String oldFile="";
+        oldFile+=Savefile.readInfo();
+        Savefile.writeInfo(oldFile+"\n"+map + stats);
     }
     
     public void play(){
@@ -269,8 +291,12 @@ public class Game{
                 Shape=(int)Math.random()*usableShapes.length;
                 placeShape(Shape,(int)(Math.random()*grid.length),(int)(Math.random()*grid.length),2);
                 System.out.println(this);
+                while (generations<5){
+                    saveFile();
+                    transition();
+                }
                 while (! (gameOver())){
-                    while (generations<5){
+                    while (generations<10){
                         saveFile();
                         transition();
                         System.out.println(this);

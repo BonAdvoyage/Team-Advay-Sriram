@@ -34,7 +34,7 @@ public class Savefile{
     	try{
     	    File savefile = new File("Game.txt"); // new file object
     	    FileWriter writer = new FileWriter(savefile); // new writer object that will write to savefile
-    	    writer.write(readInfo()+line); // write to content
+    	    writer.write(line); // write to content
     	    writer.flush(); // confirm changes
     	    writer.close(); // stop further editing
     	}
@@ -45,9 +45,6 @@ public class Savefile{
 
     public static void main(String[] args){
     	File savefile = new File("Game.txt"); // new file object
-    	//System.out.println( Savefile.readInfo() );
-    	writeInfo("hi ");
-    	writeInfo("hello");
-    	System.out.println( Savefile.readInfo() );
+    	System.out.println(Savefile.readInfo());
     }
 }
