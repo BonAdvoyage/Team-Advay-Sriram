@@ -45,6 +45,9 @@ public class Savefile{
 
     public static void main(String[] args){
     	File savefile = new File("Game.txt"); // new file object
+    	//System.out.println( Savefile.readInfo() );
+    	writeInfo("hi ");
+    	writeInfo("hello");
     	System.out.println( Savefile.readInfo() );
     }
 }

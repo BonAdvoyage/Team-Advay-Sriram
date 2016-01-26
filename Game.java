@@ -64,7 +64,7 @@ public class Game{
     }
     
     public boolean getSave(){return save;}
-    
+
     public int getGen(){return generations;}
    
     public int getTurn(){return turns;}
@@ -80,8 +80,8 @@ public class Game{
         if (ycoor <= 1){ycoor = 29-(ycoor % 30);}
         if (xcoor >= 29){xcoor = 1+(xcoor % 30);}
         if (xcoor <= 1){xcoor = 29-(xcoor % 30);}
-        //return grid[xcoor][ycoor];
-        return 1;
+        return grid[xcoor][ycoor];
+        //return 0;
     }
    
     public String getDifficulty(){return difficulty;}
