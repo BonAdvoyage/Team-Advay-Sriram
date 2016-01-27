@@ -44,6 +44,7 @@ public class Game{
         Unoccupied_Pop=(grid.length*grid.length)-AI_Pop-Person_Pop;
         difficulty = "Easy";
         
+        /*
     	//1 still life bottom left
     	grid[1][1]=1;
     	grid[1][2]=1;
@@ -54,7 +55,7 @@ public class Game{
     	grid[27][28]=2;
     	grid[28][27]=2;
     	grid[28][28]=2;
-    	
+    	*/
     	
     	
     }
@@ -130,7 +131,13 @@ public class Game{
     	return ans;
     }
     
-    public int[] checkNeighbors(int xcoor, int ycoor){
+    public String readArray(int[] r){
+        String s="[";
+        for(int x: r){s+=x+",";}
+        return s.substring(0,s.length()-1)+"]";
+    }
+    
+  /*  public int[] checkNeighbors(int xcoor, int ycoor){
         int [] neighbors =new int[2];
         int yp = ycoor + 1;
         int ym = ycoor - 1; 
@@ -161,7 +168,33 @@ public class Game{
     	if(     getSide(xm,yp) ==1){neighbors[0]++;}
     	else if(getSide(xm,ym) ==2){neighbors[1]++;}
         return neighbors;
+    } */
+    public int [] checkNeighbors (int xcoor, int ycoor){
+        int [] neighbors = new int [2];
+        if (ycoor > 29){ycoor = -1+(ycoor % 29);}
+        if (ycoor < 0){ycoor = grid.length+(ycoor % 29);}
+        if (xcoor > 29){xcoor = -1+(xcoor % 29);}
+        if (xcoor < 0){xcoor = grid.length+(xcoor % 29);}
+        for (int x = xcoor -1; x < xcoor + 2; x ++){
+            for (int y = ycoor -1; y < ycoor + 2; y++){
+                if (x < 0){x = 29 - (x%29);}
+                if (x > 29){x = -1 + (x%29);}
+                if (y < 0){y = 29 - (y%29);}
+                if (y > 29){y = 1 + (y%29);}
+                if (ycoor > 29){ycoor = -1+(ycoor % 29);}
+                if (ycoor < 0){ycoor = grid.length+(ycoor % 29);}
+                if (xcoor > 29){xcoor = -1+(xcoor % 29);}
+                if (xcoor < 0){xcoor = grid.length+(xcoor % 29);}
+                if (x != xcoor && y != ycoor){
+                    if (getSide (x, y) ==2) {neighbors [1] += 1;}
+                    if (getSide (x, y) == 1) {neighbors [0] += 1;}
+                }
+            }
+            
+        }
+        return neighbors;
     }
+    
     public int checkNumNeighbors (int xcoor, int ycoor){
         if (ycoor > 29){ycoor = -1+(ycoor % 29);}
         if (ycoor < 0){ycoor = grid.length+(ycoor % 29);}
@@ -178,23 +211,37 @@ public class Game{
         map = grid;
         for (int xcoor = 0; xcoor < 30; xcoor ++){
             for (int ycoor = 0; ycoor < 30; ycoor ++){
-                if (checkNumNeighbors(xcoor,ycoor) > 3 || checkNumNeighbors(xcoor,ycoor) < 2) {
-                    if (grid[xcoor][ycoor]==1) {map [xcoor][ycoor] = 0; Unoccupied_Pop++; generations++;Person_Pop--;}
-                    if (grid[xcoor][ycoor]==2) {map [xcoor][ycoor] = 0; Unoccupied_Pop++; generations++;AI_Pop--;}
-                }
-                else if (checkNumNeighbors (xcoor, ycoor) == 3 || checkNumNeighbors (xcoor, ycoor) == 2){
-                    if ( ! (grid[xcoor][ycoor]==0 ) ){
-                        if (checkNeighbors(xcoor, ycoor) [1] > checkNeighbors(xcoor, ycoor) [0]){
-                            map [xcoor] [ycoor] = 2; AI_Pop++; generations++; Unoccupied_Pop++;
-                        }
-                        else if (checkNeighbors(xcoor, ycoor) [1] < checkNeighbors(xcoor, ycoor) [0]){
-                            map [xcoor] [ycoor] = 1; Person_Pop++; generations++; Unoccupied_Pop++;
-                        }
+                if (checkNumNeighbors(xcoor,ycoor) > 3 || checkNumNeighbors(xcoor,ycoor) < 2 ) {
+                    //System.out.println("neighbors of ("+xcoor+","+ycoor+ ")is >3 || <2");
+                    //if (grid[xcoor][ycoor]==0) {return;}
+                    generations++;
+                    if (grid[xcoor][ycoor]==0) {map [xcoor][ycoor] = 0; generations++;}
+                    if (grid[xcoor][ycoor]==1) {
+                        System.out.println("neighbors of ("+xcoor+","+ycoor+ ")is >3 || <2: " +readArray(checkNeighbors(xcoor,ycoor)) );
+                        map [xcoor][ycoor] = 0; Unoccupied_Pop++; Person_Pop--; generations++;
+                    }
+                    if (grid[xcoor][ycoor]==2) {
+                        System.out.println("neighbors of ("+xcoor+","+ycoor+ ")is >3 || <2: " +readArray(checkNeighbors(xcoor,ycoor)) );
+                        map [xcoor][ycoor] = 0; Unoccupied_Pop++; AI_Pop--; generations++;
                     }
                 }
+                else if (checkNumNeighbors (xcoor, ycoor) == 3 && grid [xcoor][ycoor] == 0 ) {
+                    System.out.println("neighbors of ("+xcoor+","+ycoor+ ")is 3");
+                    //if ( grid[xcoor][ycoor]==0 ){
+                    if (checkNeighbors(xcoor, ycoor) [1] > checkNeighbors(xcoor, ycoor) [0]){
+                        map [xcoor] [ycoor] = 2; AI_Pop++; generations++; Unoccupied_Pop++;
+                    }
+                    else if (checkNeighbors(xcoor, ycoor) [1] < checkNeighbors(xcoor, ycoor) [0]){
+                        map [xcoor] [ycoor] = 1; Person_Pop++; generations++; Unoccupied_Pop++;
+                    }
+                    //}
+                }
             }
+        //return;
         }
+        //System.out.println(map);
         grid = map;
+        return;
     }
     
     //win if one population is greater after 1 turn
@@ -208,14 +255,14 @@ public class Game{
     
     
     public String Stats(){
-    	String s="";
-    	s+="stats:";
-        s+="\ngenerations:"+getGen();
-    	s+="\nturns:"+getTurn();
-    	s+="\nPerson population:"+getPersonPop();
-    	s+="\nAI population:"+getAIPop();
-    	s+="\nUnoccupied population:"+getUnoccupiedPop();
-    	s+="\nDifficulty level:"+getDifficulty();
+    	String s="\t";
+    	s+="\t\nstats:";
+        s+="\t\ngenerations:"+getGen();
+    	s+="\t\nturns:"+getTurn();
+    	s+="\t\nPerson population:"+getPersonPop();
+    	s+="\t\nAI population:"+getAIPop();
+    	s+="\t\nUnoccupied population:"+getUnoccupiedPop();
+    	s+="\t\nDifficulty level:"+getDifficulty();
     	return s;
     }
     
@@ -246,18 +293,18 @@ public class Game{
         if (xcoor < 0){xcoor = grid.length+(xcoor % 29);}
         int xbox = presetCoors [index][0];
         int ybox = presetCoors [index][1];
-        while ( enoughSpace(index,xcoor,ycoor) == true ){break;}
+        while ( enoughSpace(index,xcoor,ycoor) == false ){break;}
         for (int t = 2; t < presetCoors[index].length; t ++){
             for (int p = xcoor; p < xcoor+xbox; p++){
-                for (int q = ycoor; q < ycoor +ybox; q ++){
+                for (int q = ycoor; q < ycoor+ybox; q ++){
                     if (q > 29){q = -1+(q % 29);}
                     if (q < 0){q = grid.length+(q % 29);}
                     if (p > 29){p = -1+(p % 29);}
                     if (p < 0){p = grid.length+(p % 29);}
-                    if (presetCoors [index][t] == (xbox*(q-ycoor-1) + ycoor*(p-xcoor))){
+                    if (presetCoors [index][t] == ( xbox*(q-ycoor) + p-xcoor )){
                         grid [p][q] = side;
-                        if(side==1){Person_Pop+=(presetCoors.length-2);Unoccupied_Pop-=(presetCoors.length-2);}
-                        if(side==2){AI_Pop+=(presetCoors.length-2);Unoccupied_Pop-=(presetCoors.length-2);}
+                        if(side==1){Person_Pop++;Unoccupied_Pop--;}
+                        if(side==2){AI_Pop++;Unoccupied_Pop--;}
                     }
                 }
             }
