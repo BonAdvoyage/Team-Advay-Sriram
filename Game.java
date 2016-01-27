@@ -44,7 +44,7 @@ public class Game{
         Unoccupied_Pop=(grid.length*grid.length)-AI_Pop-Person_Pop;
         difficulty = "Easy";
         
-        /*
+        
     	//1 still life bottom left
     	grid[1][1]=1;
     	grid[1][2]=1;
@@ -55,7 +55,7 @@ public class Game{
     	grid[27][28]=2;
     	grid[28][27]=2;
     	grid[28][28]=2;
-    	*/
+    	
     	
     	
     }
@@ -112,7 +112,9 @@ public class Game{
     }
     public void AI (){
         if (difficulty == "Easy"){
-            String usableShapes [] = {"diehard", "prepond", "eater1", "glider", "toad", "block", "blinker", "beehive"};
+            String usableShapes [] = {
+                "diehard", "prepond", "eater1", "glider", 
+                "toad", "block", "blinker", "beehive"};
         }
         if (difficulty == "Hard"){
             usableShapes = listOfShapes;
@@ -137,7 +139,8 @@ public class Game{
         return s.substring(0,s.length()-1)+"]";
     }
     
-  /*  public int[] checkNeighbors(int xcoor, int ycoor){
+    /*
+    public int[] checkNeighbors(int xcoor, int ycoor){
         int [] neighbors =new int[2];
         int yp = ycoor + 1;
         int ym = ycoor - 1; 
@@ -164,36 +167,36 @@ public class Game{
     	if(     getSide(xp,ym) ==1){neighbors[0]++;}
     	else if(getSide(xp,ym) ==2){neighbors[1]++;}
     	if(     getSide(xp,yp) ==1){neighbors[0]++;}
-    	else if(getSide(xp,ym) ==2){neighbors[1]++;}
-    	if(     getSide(xm,yp) ==1){neighbors[0]++;}
+    	else if(getSide(xp,yp) ==2){neighbors[1]++;}
+    	if(     getSide(xm,ym) ==1){neighbors[0]++;}
     	else if(getSide(xm,ym) ==2){neighbors[1]++;}
         return neighbors;
-    } */
+    } 
+    */
     public int [] checkNeighbors (int xcoor, int ycoor){
         int [] neighbors = new int [2];
         if (ycoor > 29){ycoor = -1+(ycoor % 29);}
         if (ycoor < 0){ycoor = grid.length+(ycoor % 29);}
         if (xcoor > 29){xcoor = -1+(xcoor % 29);}
         if (xcoor < 0){xcoor = grid.length+(xcoor % 29);}
-        for (int x = xcoor -1; x < xcoor + 2; x ++){
-            for (int y = ycoor -1; y < ycoor + 2; y++){
+        for (int x = xcoor -1; x < xcoor + 1; x ++){
+            for (int y = ycoor -1; y < ycoor + 1; y++){
                 if (x < 0){x = 29 - (x%29);}
                 if (x > 29){x = -1 + (x%29);}
                 if (y < 0){y = 29 - (y%29);}
                 if (y > 29){y = 1 + (y%29);}
-                if (ycoor > 29){ycoor = -1+(ycoor % 29);}
-                if (ycoor < 0){ycoor = grid.length+(ycoor % 29);}
-                if (xcoor > 29){xcoor = -1+(xcoor % 29);}
-                if (xcoor < 0){xcoor = grid.length+(xcoor % 29);}
+                if ((xcoor+1) > 29){xcoor=1;}
+                if ((ycoor+1) > 29){ycoor=1;}
                 if (x != xcoor && y != ycoor){
-                    if (getSide (x, y) ==2) {neighbors [1] += 1;}
                     if (getSide (x, y) == 1) {neighbors [0] += 1;}
+                    if (getSide (x, y) == 2) {neighbors [1] += 1;}
                 }
             }
             
         }
         return neighbors;
     }
+    
     
     public int checkNumNeighbors (int xcoor, int ycoor){
         if (ycoor > 29){ycoor = -1+(ycoor % 29);}
@@ -214,25 +217,24 @@ public class Game{
                 if (checkNumNeighbors(xcoor,ycoor) > 3 || checkNumNeighbors(xcoor,ycoor) < 2 ) {
                     //System.out.println("neighbors of ("+xcoor+","+ycoor+ ")is >3 || <2");
                     //if (grid[xcoor][ycoor]==0) {return;}
-                    generations++;
                     if (grid[xcoor][ycoor]==0) {map [xcoor][ycoor] = 0; generations++;}
                     if (grid[xcoor][ycoor]==1) {
-                        System.out.println("neighbors of ("+xcoor+","+ycoor+ ")is >3 || <2: " +readArray(checkNeighbors(xcoor,ycoor)) );
+                        //System.out.println("neighbors of ("+xcoor+","+ycoor+ ")is >3 || <2: " +readArray(checkNeighbors(xcoor,ycoor)) );
                         map [xcoor][ycoor] = 0; Unoccupied_Pop++; Person_Pop--; generations++;
                     }
                     if (grid[xcoor][ycoor]==2) {
-                        System.out.println("neighbors of ("+xcoor+","+ycoor+ ")is >3 || <2: " +readArray(checkNeighbors(xcoor,ycoor)) );
+                        //System.out.println("neighbors of ("+xcoor+","+ycoor+ ")is >3 || <2: " +readArray(checkNeighbors(xcoor,ycoor)) );
                         map [xcoor][ycoor] = 0; Unoccupied_Pop++; AI_Pop--; generations++;
                     }
                 }
                 else if (checkNumNeighbors (xcoor, ycoor) == 3 && grid [xcoor][ycoor] == 0 ) {
-                    System.out.println("neighbors of ("+xcoor+","+ycoor+ ")is 3");
+                    //System.out.println("neighbors of ("+xcoor+","+ycoor+ ")is 3: "+readArray(checkNeighbors(xcoor,ycoor)));
                     //if ( grid[xcoor][ycoor]==0 ){
                     if (checkNeighbors(xcoor, ycoor) [1] > checkNeighbors(xcoor, ycoor) [0]){
-                        map [xcoor] [ycoor] = 2; AI_Pop++; generations++; Unoccupied_Pop++;
+                        map [xcoor] [ycoor] = 2; AI_Pop++; generations++; Unoccupied_Pop--;
                     }
                     else if (checkNeighbors(xcoor, ycoor) [1] < checkNeighbors(xcoor, ycoor) [0]){
-                        map [xcoor] [ycoor] = 1; Person_Pop++; generations++; Unoccupied_Pop++;
+                        map [xcoor] [ycoor] = 1; Person_Pop++; generations++; Unoccupied_Pop--;
                     }
                     //}
                 }
@@ -316,10 +318,10 @@ public class Game{
     //prints grid and stats on another file
     public void saveFile(){
         String stats=Stats();
-        //String map=toString();
+        String map=toString();
         String oldFile="";
         oldFile+=Savefile.readInfo();
-        Savefile.writeInfo(oldFile+"\n"+ stats + "\n");
+        Savefile.writeInfo(oldFile+"\n"+ map + stats + "\n");
     }
     
     public void play(){
@@ -352,10 +354,10 @@ public class Game{
                     Xcoor=Integer.parseInt(newxcoor);
                 	System.out.print("ycoor:");
                     String newycoor=Keyboard.readString();
-                    int NewYcoor=Integer.parseInt(newycoor);
+                    Ycoor=Integer.parseInt(newycoor);
                 }
                 placeShape(Shape,Xcoor,Ycoor,1); turns++;
-                Shape=(int)Math.random()*usableShapes.length;
+                Shape=(int) (Math.random()*usableShapes.length) ;
                 placeShape(Shape,(int)(Math.random()*grid.length),(int)(Math.random()*grid.length),2);
                 System.out.println(this);
                 while (generations<5){
@@ -363,11 +365,32 @@ public class Game{
                     transition();
                 }
                 while (! (gameOver())){
-                    while (generations<10){
+                    int oldGenerations=generations;
+                    while (generations<oldGenerations+10){
                         saveFile();
                         transition();
                     }//end while
                     System.out.println(this);
+                	System.out.println("Select where you want to place the shape:");
+                	System.out.print("xcoor:");
+                    xcoor=Keyboard.readString();
+                    Xcoor=Integer.parseInt(xcoor);
+                	System.out.print("ycoor:");
+                    ycoor=Keyboard.readString();
+                    Ycoor=Integer.parseInt(ycoor);
+                    while(! (enoughSpace(Shape,Xcoor,Ycoor)) ){
+                    	System.out.println("Select where you want to place the shape:");
+                    	System.out.print("xcoor:");
+                        String newxcoor=Keyboard.readString();
+                        Xcoor=Integer.parseInt(newxcoor);
+                    	System.out.print("ycoor:");
+                        String newycoor=Keyboard.readString();
+                        Ycoor=Integer.parseInt(newycoor);
+                    }
+                    placeShape(Shape,Xcoor,Ycoor,1); turns++;
+                    Shape=(int) (Math.random()*usableShapes.length) ;
+                    placeShape(Shape,(int)(Math.random()*grid.length),(int)(Math.random()*grid.length),2);
+                    
                 }//end while
                 
                 System.out.println(this);
@@ -406,16 +429,42 @@ public class Game{
                     Xcoor=Integer.parseInt(newxcoor);
                 	System.out.print("ycoor:");
                     String newycoor=Keyboard.readString();
-                    int NewYcoor=Integer.parseInt(newycoor);
+                    Ycoor=Integer.parseInt(newycoor);
                 }
                 placeShape(Shape,Xcoor,Ycoor,1); turns++;
-                Shape=(int)Math.random()*usableShapes.length;
+                Shape=(int) (Math.random()*usableShapes.length) ;
                 placeShape(Shape,(int)(Math.random()*grid.length),(int)(Math.random()*grid.length),2);
                 System.out.println(this);
+                while (generations<5){
+                    saveFile();
+                    transition();
+                }
                 while (! (gameOver())){
-                    while (generations<5){
+                    int oldGenerations=generations;
+                    while (generations<oldGenerations+10){
                         transition();
                     }//end while
+                    System.out.println(this);
+                	System.out.println("Select where you want to place the shape:");
+                	System.out.print("xcoor:");
+                    xcoor=Keyboard.readString();
+                    Xcoor=Integer.parseInt(xcoor);
+                	System.out.print("ycoor:");
+                    ycoor=Keyboard.readString();
+                    Ycoor=Integer.parseInt(ycoor);
+                    while(! (enoughSpace(Shape,Xcoor,Ycoor)) ){
+                    	System.out.println("Select where you want to place the shape:");
+                    	System.out.print("xcoor:");
+                        String newxcoor=Keyboard.readString();
+                        Xcoor=Integer.parseInt(newxcoor);
+                    	System.out.print("ycoor:");
+                        String newycoor=Keyboard.readString();
+                        Ycoor=Integer.parseInt(newycoor);
+                    }
+                    placeShape(Shape,Xcoor,Ycoor,1); turns++;
+                    Shape=(int) (Math.random()*usableShapes.length) ;
+                    placeShape(Shape,(int)(Math.random()*grid.length),(int)(Math.random()*grid.length),2);
+                    
                 }//end while
                 if (AI_Pop>Person_Pop){System.out.println("YOU LOSE!");}
                 if (AI_Pop<Person_Pop){System.out.println("YOU WIN!");}
@@ -451,24 +500,37 @@ public class Game{
             	System.out.print("ycoor:");
                 String ycoor=Keyboard.readString();
                 int Ycoor=Integer.parseInt(ycoor);
-                while(! (enoughSpace(Shape,Xcoor,Ycoor)) ){
-                	System.out.println("Select where you want to place the shape:");
-                	System.out.print("xcoor:");
-                    String newxcoor=Keyboard.readString();
-                    Xcoor=Integer.parseInt(newxcoor);
-                	System.out.print("ycoor:");
-                    String newycoor=Keyboard.readString();
-                    int NewYcoor=Integer.parseInt(newycoor);
+                while (generations<5){
+                    saveFile();
+                    transition();
                 }
-                placeShape(Shape,Xcoor,Ycoor,1); turns++;
-                Shape=(int)Math.random()*usableShapes.length;
-                placeShape(Shape,(int)(Math.random()*grid.length),(int)(Math.random()*grid.length),2);
-                System.out.println(this);
                 while (! (gameOver())){
-                    while (generations<5){
+                    int oldGenerations=generations;
+                    while (generations<oldGenerations+10){
                         saveFile();
                         transition();
                     }//end while
+                    System.out.println(this);
+                	System.out.println("Select where you want to place the shape:");
+                	System.out.print("xcoor:");
+                    xcoor=Keyboard.readString();
+                    Xcoor=Integer.parseInt(xcoor);
+                	System.out.print("ycoor:");
+                    ycoor=Keyboard.readString();
+                    Ycoor=Integer.parseInt(ycoor);
+                    while(! (enoughSpace(Shape,Xcoor,Ycoor)) ){
+                    	System.out.println("Select where you want to place the shape:");
+                    	System.out.print("xcoor:");
+                        String newxcoor=Keyboard.readString();
+                        Xcoor=Integer.parseInt(newxcoor);
+                    	System.out.print("ycoor:");
+                        String newycoor=Keyboard.readString();
+                        Ycoor=Integer.parseInt(newycoor);
+                    }
+                    placeShape(Shape,Xcoor,Ycoor,1); turns++;
+                    Shape=(int) (Math.random()*usableShapes.length) ;
+                    placeShape(Shape,(int)(Math.random()*grid.length),(int)(Math.random()*grid.length),2);
+                    
                 }//end while
                 if (AI_Pop>Person_Pop){System.out.println("YOU LOSE!");}
                 if (AI_Pop<Person_Pop){System.out.println("YOU WIN!");}
@@ -498,24 +560,36 @@ public class Game{
             	System.out.print("ycoor:");
                 String ycoor=Keyboard.readString();
                 int Ycoor=Integer.parseInt(ycoor);
-                while(! (enoughSpace(Shape,Xcoor,Ycoor)) ){
-                	System.out.println("Select where you want to place the shape:");
-                	System.out.print("xcoor:");
-                    String newxcoor=Keyboard.readString();
-                    Xcoor=Integer.parseInt(newxcoor);
-                	System.out.print("ycoor:");
-                    String newycoor=Keyboard.readString();
-                    int NewYcoor=Integer.parseInt(newycoor);
+                while (generations<5){
+                    saveFile();
+                    transition();
                 }
-                placeShape(Shape,Xcoor,Ycoor,1); turns++;
-                Shape=(int)Math.random()*usableShapes.length;
-                placeShape(Shape,(int)(Math.random()*grid.length),(int)(Math.random()*grid.length),2);
-                System.out.println(this);
                 while (! (gameOver())){
-                    while (generations<5){
+                    int oldGenerations=generations;
+                    while (generations<oldGenerations+10){
                         transition();
                     }//end while
                     System.out.println(this);
+                	System.out.println("Select where you want to place the shape:");
+                	System.out.print("xcoor:");
+                    xcoor=Keyboard.readString();
+                    Xcoor=Integer.parseInt(xcoor);
+                	System.out.print("ycoor:");
+                    ycoor=Keyboard.readString();
+                    Ycoor=Integer.parseInt(ycoor);
+                    while(! (enoughSpace(Shape,Xcoor,Ycoor)) ){
+                    	System.out.println("Select where you want to place the shape:");
+                    	System.out.print("xcoor:");
+                        String newxcoor=Keyboard.readString();
+                        Xcoor=Integer.parseInt(newxcoor);
+                    	System.out.print("ycoor:");
+                        String newycoor=Keyboard.readString();
+                        Ycoor=Integer.parseInt(newycoor);
+                    }
+                    placeShape(Shape,Xcoor,Ycoor,1); turns++;
+                    Shape=(int) (Math.random()*usableShapes.length) ;
+                    placeShape(Shape,(int)(Math.random()*grid.length),(int)(Math.random()*grid.length),2);
+                    
                 }//end while
                 if (AI_Pop>Person_Pop){System.out.println("YOU LOSE!");}
                 if (AI_Pop<Person_Pop){System.out.println("YOU WIN!");}
