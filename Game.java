@@ -174,24 +174,27 @@ public class Game{
     }
     
     public void transition (){
+        int map [][] = new int [30][30];
+        map = grid;
         for (int xcoor = 0; xcoor < 30; xcoor ++){
             for (int ycoor = 0; ycoor < 30; ycoor ++){
                 if (checkNumNeighbors(xcoor,ycoor) > 3 || checkNumNeighbors(xcoor,ycoor) < 2) {
-                    if (grid[xcoor][ycoor]==1) {grid [xcoor][ycoor] = 0; Unoccupied_Pop++; generations++;Person_Pop--;}
-                    if (grid[xcoor][ycoor]==2) {grid [xcoor][ycoor] = 0; Unoccupied_Pop++; generations++;AI_Pop--;}
+                    if (grid[xcoor][ycoor]==1) {map [xcoor][ycoor] = 0; Unoccupied_Pop++; generations++;Person_Pop--;}
+                    if (grid[xcoor][ycoor]==2) {map [xcoor][ycoor] = 0; Unoccupied_Pop++; generations++;AI_Pop--;}
                 }
                 else if (checkNumNeighbors (xcoor, ycoor) == 3 || checkNumNeighbors (xcoor, ycoor) == 2){
                     if ( ! (grid[xcoor][ycoor]==0 ) ){
                         if (checkNeighbors(xcoor, ycoor) [1] > checkNeighbors(xcoor, ycoor) [0]){
-                            grid [xcoor] [ycoor] = 2; AI_Pop++; generations++; Unoccupied_Pop++;
+                            map [xcoor] [ycoor] = 2; AI_Pop++; generations++; Unoccupied_Pop++;
                         }
                         else if (checkNeighbors(xcoor, ycoor) [1] < checkNeighbors(xcoor, ycoor) [0]){
-                            grid [xcoor] [ycoor] = 1; Person_Pop++; generations++; Unoccupied_Pop++;
+                            map [xcoor] [ycoor] = 1; Person_Pop++; generations++; Unoccupied_Pop++;
                         }
                     }
                 }
             }
         }
+        grid = map;
     }
     
     //win if one population is greater after 1 turn

@@ -1,8 +1,8 @@
-stats:generations:0turns:1Person population:50AI population:32Unoccupied population:818Difficulty level:Easystats:generations:0turns:1Person population:31AI population:13Unoccupied population:856Difficulty level:Easystats:generations:0turns:1Person population:69AI population:15Unoccupied population:816Difficulty level:Easystats:generations:0turns:1Person population:12AI population:12Unoccupied population:876Difficulty level:Easystats:generations:0turns:1Person population:12AI population:12Unoccupied population:876Difficulty level:Easystats:generations:0turns:1Person population:41AI population:77Unoccupied population:782Difficulty level:Easystats:generations:0turns:1Person population:20AI population:20Unoccupied population:860Difficulty level:Easy
+stats:generations:0turns:1Person population:50AI population:32Unoccupied population:818Difficulty level:Easystats:generations:0turns:1Person population:31AI population:13Unoccupied population:856Difficulty level:Easystats:generations:0turns:1Person population:69AI population:15Unoccupied population:816Difficulty level:Easystats:generations:0turns:1Person population:12AI population:12Unoccupied population:876Difficulty level:Easystats:generations:0turns:1Person population:12AI population:12Unoccupied population:876Difficulty level:Easystats:generations:0turns:1Person population:41AI population:77Unoccupied population:782Difficulty level:Easystats:generations:0turns:1Person population:20AI population:20Unoccupied population:860Difficulty level:Easystats:generations:0turns:1Person population:62AI population:26Unoccupied population:812Difficulty level:Easy
 stats:
 generations:0
 turns:1
-Person population:62
-AI population:26
-Unoccupied population:812
+Person population:104
+AI population:32
+Unoccupied population:764
 Difficulty level:Easy
