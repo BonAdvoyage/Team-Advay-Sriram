@@ -87,9 +87,15 @@ JANET:
     debugged
 ADVAY:
     debugged
+    fixed placeShape
 ______________________________
 01-26-16
 JANET:
     Fixed major bugs in Transition, check neighnors, checknumneighbors, play()
     figured out the wrapper function.
     robustified play()
+ADVAY:
+    Debugged placeShape, transition, checkNumNeighbors
+    rewrote wrapper
+    Fixed enoughSpace
+    Fixed play ()

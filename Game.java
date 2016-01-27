@@ -13,26 +13,26 @@ public class Game{
         "eater1", "eater2","tub","prepond", "rabbit", 
         "boat","reflector","toad","diehard", "BHeptomino"};
     protected final int presetCoors [][] = {
-        {3, 3, 2, 6, 7, 8, 9},
-        {7, 3, 2, 11, 15, 16, 19, 20, 21},
-        {2, 2, 1, 2, 3, 4},
-        {1, 3, 1, 2, 3},
-        {3, 3, 2, 3, 4, 5, 8},
-        {5, 5, 2, 5, 6, 11, 15, 16, 17, 18, 19},
-        {6, 5, 4, 8, 12, 13, 19, 24, 25, 26, 27, 28, 29},
-        {6, 6, 4, 5, 9, 12, 13, 16, 18, 25, 27, 28, 32},
-        {4, 3, 2, 3, 5, 8, 10, 11},
-        {4, 4, 2, 3, 5, 8, 10, 12, 15},
-        {4, 4, 1, 2, 5, 7, 11, 15, 16},
-        {7, 7, 4, 6, 7, 9, 10, 11, 13, 14, 15, 23, 24, 25, 27, 28, 32, 34, 39, 41, 47},
+        {3, 3, 1, 5, 6, 7, 8},
+        {7, 3, 1, 10, 14, 15, 18, 19, 20},
+        {2, 2, 0, 1, 2, 3},
+        {1, 3, 0, 1, 2},
+        {3, 3, 1, 2, 3, 4, 7},
+        {5, 5, 1, 4, 5, 10, 14, 15, 16, 17, 18},
+        {6, 5, 3, 7, 11, 12, 18, 23, 24, 25, 26, 27, 28},
+        {6, 6, 3, 4, 8, 11, 12, 15, 17, 24, 26, 27, 31},
+        {4, 3, 1, 2, 4, 7, 11, 10},
+        {4, 4, 1, 2, 4, 7, 9, 11, 14},
+        {4, 4, 0, 1, 4, 6, 10, 14, 15},
+        {7, 7, 3, 5, 6, 8, 9, 10, 12, 13, 14, 22, 23, 24, 26, 27, 31, 33, 38, 40, 46},
         {3, 3, 2, 4, 6, 7},
-        {3, 3, 2, 4, 5, 9},
-        {7, 3, 1, 5, 6, 7, 8, 9, 10, 13, 16},
-        {3, 3, 1, 2, 4, 6, 8},
-        {16, 9, 3, 14, 17, 18, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 31, 32, 35, 46},
-        {4, 2, 2, 3, 4, 5, 6, 7},
-        {8, 3, 7, 9, 10, 18, 22, 23, 24},
-        {4, 3, 1, 3, 4, 5, 6, 7, 10}
+        {3, 3, 1, 3, 4, 8},
+        {7, 3, 0, 4, 5, 6, 7, 8, 9, 12, 15},
+        {3, 3, 0, 1, 3, 5, 7},
+        {16, 9, 2, 13, 16, 17, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 30, 31, 34, 45},
+        {4, 2, 1, 2, 3, 4, 5, 6},
+        {8, 3, 6, 8, 9, 17, 21, 22, 23},
+        {4, 3, 0, 2, 3, 4, 5, 6, 9}
     };
     protected String [] usableShapes = new String [20];
     protected boolean save;
@@ -59,9 +59,7 @@ public class Game{
     	
     }
     
-    public void setGrid(int xcoor,int ycoor, int side){
-        grid[xcoor][ycoor]=side;
-    }
+    public void setGrid(int xcoor,int ycoor, int side){ grid[xcoor][ycoor]=side; }
     
     public String printShapeList(){
         String s="\n";
@@ -135,7 +133,7 @@ public class Game{
     public int[] checkNeighbors(int xcoor, int ycoor){
         int [] neighbors =new int[2];
         int yp = ycoor + 1;
-        int ym = ycoor - 1;
+        int ym = ycoor - 1; 
         int xp = xcoor + 1;
         int xm = xcoor - 1;
         if (ycoor > 29){ycoor = -1+(ycoor % 29);}
@@ -198,7 +196,10 @@ public class Game{
     
     //win if one population is greater after 1 turn
     public boolean gameOver (){
-        if  ((AI_Pop > Person_Pop || AI_Pop < Person_Pop)) {return true;}
+    //    if  ((AI_Pop == 0 || Person_Pop == 0)) {return true;}
+       // else if (generations > 1000) {return true;}
+        //if (AI_Pop < Person_Pop|| Person_Pop < AI_Pop){return true;}
+        if (AI_Pop < ( Person_Pop + 10 ) || Person_Pop < ( AI_Pop + 10 ) ){return true;}
         return false;
     }
     
@@ -216,8 +217,13 @@ public class Game{
     }
     
     public boolean enoughSpace(int shape, int xcoor, int ycoor){
-        int[] coors=presetCoors[shape];
-        int xbox=coors[0]; int ybox=coors[1];
+       //int[] coors=presetCoors[shape=coors[1]];
+        if (ycoor > 29){ycoor = -1+(ycoor % 29);}
+        if (ycoor < 0){ycoor = grid.length+(ycoor % 29);}
+        if (xcoor > 29){xcoor = -1+(xcoor % 29);}
+        if (xcoor < 0){xcoor = grid.length+(xcoor % 29);}
+        int xbox = presetCoors [shape][0];
+        int ybox = presetCoors [shape][1];
         for (int a = xcoor; a < xbox; a ++){
             for (int b = ycoor; b < ybox; b ++){
                 if (grid [a][b] != 0){
@@ -237,7 +243,7 @@ public class Game{
         if (xcoor < 0){xcoor = grid.length+(xcoor % 29);}
         int xbox = presetCoors [index][0];
         int ybox = presetCoors [index][1];
-        while ( !(enoughSpace(index,xcoor,ycoor)) ){return;}
+        while ( enoughSpace(index,xcoor,ycoor) == true ){break;}
         for (int t = 2; t < presetCoors[index].length; t ++){
             for (int p = xcoor; p < xcoor+xbox; p++){
                 for (int q = ycoor; q < ycoor +ybox; q ++){
@@ -253,6 +259,8 @@ public class Game{
                 }
             }
         }
+        System.out.println(this);
+        System.out.println(Stats());
     }//end placeshape
     
     //prints grid and stats on another file
@@ -291,7 +299,7 @@ public class Game{
                 	System.out.println("Select where you want to place the shape:");
                 	System.out.print("xcoor:");
                     String newxcoor=Keyboard.readString();
-                    int NewXcoor=Integer.parseInt(newxcoor);
+                    Xcoor=Integer.parseInt(newxcoor);
                 	System.out.print("ycoor:");
                     String newycoor=Keyboard.readString();
                     int NewYcoor=Integer.parseInt(newycoor);
@@ -308,8 +316,8 @@ public class Game{
                     while (generations<10){
                         saveFile();
                         transition();
-                        System.out.println(this);
                     }//end while
+                    System.out.println(this);
                 }//end while
                 
                 System.out.println(this);
@@ -345,7 +353,7 @@ public class Game{
                 	System.out.println("Select where you want to place the shape:");
                 	System.out.print("xcoor:");
                     String newxcoor=Keyboard.readString();
-                    int NewXcoor=Integer.parseInt(newxcoor);
+                    Xcoor=Integer.parseInt(newxcoor);
                 	System.out.print("ycoor:");
                     String newycoor=Keyboard.readString();
                     int NewYcoor=Integer.parseInt(newycoor);
@@ -397,7 +405,7 @@ public class Game{
                 	System.out.println("Select where you want to place the shape:");
                 	System.out.print("xcoor:");
                     String newxcoor=Keyboard.readString();
-                    int NewXcoor=Integer.parseInt(newxcoor);
+                    Xcoor=Integer.parseInt(newxcoor);
                 	System.out.print("ycoor:");
                     String newycoor=Keyboard.readString();
                     int NewYcoor=Integer.parseInt(newycoor);
@@ -444,7 +452,7 @@ public class Game{
                 	System.out.println("Select where you want to place the shape:");
                 	System.out.print("xcoor:");
                     String newxcoor=Keyboard.readString();
-                    int NewXcoor=Integer.parseInt(newxcoor);
+                    Xcoor=Integer.parseInt(newxcoor);
                 	System.out.print("ycoor:");
                     String newycoor=Keyboard.readString();
                     int NewYcoor=Integer.parseInt(newycoor);
