@@ -346,6 +346,9 @@ public class Game{
     		ycoor=Keyboard.readString();
     		Ycoor=Integer.parseInt(ycoor);
     		while(! (enoughSpace(Shape,Xcoor,Ycoor)) ){
+        	    System.out.print("Select a shape:"+printShapeList()+"\nSelection: ");
+        	    String shape=Keyboard.readString();
+        	    int Shape=Integer.parseInt(shape);
     		    System.out.println("Select where you want to place the shape:");
     		    System.out.print("xcoor:");
     		    String newxcoor=Keyboard.readString();
@@ -438,6 +441,9 @@ public class Game{
     		    transition();
     		}//end while
     		System.out.println(this);
+    	    System.out.print("Select a shape:"+printShapeList()+"\nSelection: ");
+    	    String shape=Keyboard.readString();
+    	    int Shape=Integer.parseInt(shape);
     		System.out.println("Select where you want to place the shape:");
     		System.out.print("xcoor:");
     		xcoor=Keyboard.readString();
