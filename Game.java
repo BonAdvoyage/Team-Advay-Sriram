@@ -339,7 +339,7 @@ public class Game{
     		}//end while
     		System.out.println(this);
     	    System.out.print("Select a shape:"+printShapeList()+"\nSelection: ");
-    	    String shape=Keyboard.readString();
+    	    shape=Keyboard.readString();
     	    Shape=Integer.parseInt(shape);
     		System.out.println("Select where you want to place the shape:");
     		System.out.print("xcoor:");
@@ -442,7 +442,7 @@ public class Game{
     		}//end while
     		System.out.println(this);
     	    System.out.print("Select a shape:"+printShapeList()+"\nSelection: ");
-    	    String shape=Keyboard.readString();
+    	    shape=Keyboard.readString();
     	    Shape=Integer.parseInt(shape);
     		System.out.println("Select where you want to place the shape:");
     		System.out.print("xcoor:");
