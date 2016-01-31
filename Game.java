@@ -436,7 +436,6 @@ public class Game{
     		System.out.println("oldGen+10:" + oldGenerations+10);
     		while (generations<oldGenerations+10){
     		    saveFile();
-    		    System.out.println(generations);
     		    generations++;
     		    transition();
     		}//end while
