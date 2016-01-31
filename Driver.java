@@ -25,9 +25,9 @@ public class Driver{
         */
         
         //g.play();
-       // System.out.println(g);
-    //    System.out.println(g.readArray(g.checkNeighbors(0,0)));
-      //  System.out.println(g);
+        //System.out.println(g);
+        //System.out.println(g.readArray(g.checkNeighbors(0,0)));
+        //System.out.println(g);
         //System.out.println(g.readArray(g.checkNeighbors(1,1)));
         /*
         for (int xcoor = 0; xcoor < 30; xcoor ++){

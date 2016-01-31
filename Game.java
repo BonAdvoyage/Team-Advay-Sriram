@@ -139,40 +139,6 @@ public class Game{
         return s.substring(0,s.length()-1)+"]";
     }
     
-    /*
-    public int[] checkNeighbors(int xcoor, int ycoor){
-        int [] neighbors =new int[2];
-        int yp = ycoor + 1;
-        int ym = ycoor - 1; 
-        int xp = xcoor + 1;
-        int xm = xcoor - 1;
-        if (ycoor > 29){ycoor = -1+(ycoor % 29);}
-        if (ycoor < 0){ycoor = grid.length+(ycoor % 29);}
-        if (xcoor > 29){xcoor = -1+(xcoor % 29);}
-        if (xcoor < 0){xcoor = grid.length+(xcoor % 29);}
-        if (yp > 29){yp = -1+((yp) % 29);}
-        if (ym < 0){ym = grid.length+((ym) % 29);}
-        if (xp > 29){xp = -1+((xp) % 29);}
-        if (xm < 0){xm = grid.length+((xm) % 29);}
-    	if(     getSide(xcoor,yp)==1){neighbors[0]++;}
-    	else if(getSide(xcoor,yp)==2){neighbors[1]++;}
-    	if(     getSide(xcoor,ym)==1){neighbors[0]++;}
-    	else if(getSide(xcoor,ym)==2){neighbors[1]++;}
-    	if(     getSide(xp,ycoor)==1){neighbors[0]++;}
-    	else if(getSide(xp,ycoor)==2){neighbors[1]++;}
-    	if(     getSide(xm,ycoor)==1){neighbors[0]++;}
-    	else if(getSide(xm,ycoor)==2){neighbors[1]++;}
-    	if(     getSide(xm,yp) ==1){neighbors[0]++;}
-    	else if(getSide(xm,yp) ==2){neighbors[1]++;}
-    	if(     getSide(xp,ym) ==1){neighbors[0]++;}
-    	else if(getSide(xp,ym) ==2){neighbors[1]++;}
-    	if(     getSide(xp,yp) ==1){neighbors[0]++;}
-    	else if(getSide(xp,yp) ==2){neighbors[1]++;}
-    	if(     getSide(xm,ym) ==1){neighbors[0]++;}
-    	else if(getSide(xm,ym) ==2){neighbors[1]++;}
-        return neighbors;
-    } 
-    */
     public int [] checkNeighbors (int xcoor, int ycoor){
         int [] neighbors = new int [2];
         if (ycoor > 29){ycoor = -1+(ycoor % 29);}
@@ -185,8 +151,6 @@ public class Game{
                 if (x > 29){x = -1 + (x%29);}
                 if (y < 0){y = 29 - (y%29);}
                 if (y > 29){y = 1 + (y%29);}
-                //if ((xcoor+1) > 29){xcoor=1;}
-                //if ((ycoor+1) > 29){ycoor=1;}
                 if (x != xcoor && y != ycoor){
                     if (getSide (x, y) == 1) {neighbors [0] += 1;}
                     if (getSide (x, y) == 2) {neighbors [1] += 1;}
@@ -309,7 +273,7 @@ public class Game{
         String map=toString();
         String oldFile="";
         oldFile+=Savefile.readInfo();
-        Savefile.writeInfo(oldFile+"\n"+ map + stats + "\n");
+        Savefile.writeInfo(oldFile+"\n"+ map + "\n" + stats + "\n");
     }
     
     public void play(){
@@ -364,14 +328,14 @@ public class Game{
     	    System.out.println(this);
     	    while (!gameOver()){
     			saveFile();
-    		//	transition();
+    			transition();
     		//}
     		//while (! (gameOver())){
     		int oldGenerations=generations;
     		while (generations<oldGenerations+10){
     		    saveFile();
     		    generations++;
-    		    //transition();
+    		    transition();
     		}//end while
     		System.out.println(this);
     		System.out.println("Select where you want to place the shape:");
@@ -462,7 +426,7 @@ public class Game{
     	    while (!gameOver()){
     			saveFile();
     			generations++;
-    		//	transition();
+    			transition();
     		//}
     		//while (! (gameOver())){
     		int oldGenerations=generations;
@@ -471,7 +435,7 @@ public class Game{
     		    saveFile();
     		    System.out.println(generations);
     		    generations++;
-    		    //transition();
+    		    transition();
     		}//end while
     		System.out.println(this);
     		System.out.println("Select where you want to place the shape:");
